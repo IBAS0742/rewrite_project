@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>WIN10-UI</title>
+    <link rel='Shortcut Icon' type='image/x-icon' href='./img/windows.ico'>
+    <script type="text/javascript" src="./js/jquery-2.2.4.min.js"></script>
+    <link href="./css/animate.css" rel="stylesheet">
+    <script type="text/javascript" src="./component/layer-v3.0.3/layer/layer.js"></script>
+    <link rel="stylesheet" href="./component/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="./css/default.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/vue.min.js"></script>
+    <script type="text/javascript" src="./js/vuex.js"></script>
+    <script type="text/javascript" src="./vue_module/core.js"></script>
+    <style>
+        * {
+            font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu
+        }
+
+        /*磁贴自定义样式*/
+        .win10-block-content-text {
+            line-height: 44px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        #win10_hide_task_ibas>div:hover{
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="e1" style="width: 100%;height:100%;">
+        <win10></win10>
+    </div>
+</body>
+<script>
+    ~function () {
+        //配置桌面图标
+        win10_store.state.shortcuts = [
+            {
+                //默认参数
+                x : 0,y : 0,
+                //用于标记
+                id : "sc_1",
+                //点击事件
+                click : function () {
+                    console.log("点击图标事件");
+                },
+                //图标
+                img : "./img/icon/win10.png",
+                //标题
+                title : "桌面图标"
+            }
+        ];
+        //配置桌面图标
+        win10_store.state.bottomLeftIcon = [{
+            //显示的图标，fa 图标库中的一个图标
+            icon : "fa fa-comment-o",
+            //id
+            id : "bottom" + (new Date()).getTime(),
+            //点击事件(必须)
+            click : function () {
+                console.log(new Date());
+            }
+        }];
+        //磁贴
+        win10_store.state.margent = [
+            {
+                title : "test",
+                margents : [
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "1,1",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    },
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "3,3",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    },
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "5,1",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    }
+                ]
+            },
+            {
+                title : "test2",
+                margents : [
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "1,1",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    },
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "3,3",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    },
+                    {
+                        click : function () {
+                            console.log("margent-test-1");
+                        },
+                        loc : "5,1",
+                        size : "2,2",
+                        html : '<div class="content"><img style="display: inline-block;border-radius: 4px;width:100%;height:100%" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/></div>'
+                    }
+                ]
+            }
+        ];
+        //开始菜单
+        win10_store.state.menuIcon = [
+            {
+                icon : "red icon fa fa-wrench fa-fw",
+                title : "1111111",
+                child : [{
+                    title : "1-11111",
+                    click : function () {
+                        console.log("1-111");
+                    },
+                    icon : "red icon fa fa-wrench fa-fw"
+                },{
+                    title : "1-11111",
+                    click : function () {
+                        console.log("1-111");
+                    },
+                    icon : "red icon fa fa-wrench fa-fw"
+                },{
+                    title : "1-11111",
+                    click : function () {
+                        console.log("1-111");
+                    },
+                    icon : "red icon fa fa-wrench fa-fw"
+                }]
+            },
+            {
+                icon : "blue icon fa fa-wrench fa-fw",
+                title : "2222222222",
+                child : null,
+                click : function () {
+                    console.log("222222222222");
+                }
+            }
+        ];
+        //右小角隐藏的图标
+        win10_store.state.htask = [
+            {
+                //显示的图标，fa 图标库中的一个图标
+                icon : "fa fa-chevron-up",
+                //点击事件(必须)
+                click : function () {
+                    console.log(new Date());
+                }
+            }
+        ];
+        //左下角的图标
+        win10_store.state.bottomLeftIcon = [{
+            //显示的图标，fa 图标库中的一个图标
+            icon : "fa fa-comment-o",
+            //id
+            id : "bottom" + (new Date()).getTime(),
+            //点击事件(必须)
+            click : function () {
+                console.log(new Date());
+            }
+        }];
+        //消息
+        win10_store.state.messages = [
+            {
+                title : "消息标题",
+                content : "消息内容",
+                msgClass : "msg"
+            },
+            {
+                title : "消息标题",
+                content : "消息内容",
+                msgClass : "msg"
+            }
+        ];
+        win10_store.state.desktopBg = {
+            background : "url('./img/wallpapers/46.jpg')",
+            "background-repeat" : "no-repeat",
+            "background-size" : "100% 100%"
+        };
+    }();
+    var win10 = new Vue({
+        el : "#e1"
+    });
+</script>
+</html>
