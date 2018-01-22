@@ -1,7 +1,7 @@
 ## WIN10-UI
 [demo](http://vue-win10.halahala.cn/)
 
-### 该页面内容由 [yuri2peter/win10-ui](https://github.com/yuri2peter/win10-ui) 使用 vue 进行重写的比较完整的版本（鉴于作者有可能会自己开发 vue 版本，该项目不会有任何牵涉，独立之外没有相关。）
+### 该页面内容由 [yuri2peter/win10-ui 项目](https://github.com/yuri2peter/win10-ui) 使用 vue 进行重写的比较完整的版本（鉴于作者有可能会自己开发 vue 版本，该项目不会有任何牵涉，独立之外没有相关。）
 
 ### 相对于原本的系统减少了以下配置
 ##### 1.弹层
