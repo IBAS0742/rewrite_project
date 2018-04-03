@@ -39,23 +39,27 @@
 </body>
 <script>
     ~function () {
+        var sc = {
+            //默认参数
+            x : 0,y : 0,
+            //用于标记
+            id : "sc_1",
+            //点击事件
+            click : function () {
+                console.log("点击图标事件");
+            },
+            //图标
+            img : "./img/icon/win10.png",
+            //标题
+            title : "桌面图标"
+        };
+        var scs = [];
+        for (var i = 0;i < 10;i++) {
+            scs.push(Object.assign({},sc,{title : "第" + (i + 1) + "个"}));
+        }
+
         //配置桌面图标
-        win10_store.state.shortcuts = [
-            {
-                //默认参数
-                x : 0,y : 0,
-                //用于标记
-                id : "sc_1",
-                //点击事件
-                click : function () {
-                    console.log("点击图标事件");
-                },
-                //图标
-                img : "./img/icon/win10.png",
-                //标题
-                title : "桌面图标"
-            }
-        ];
+        win10_store.state.shortcuts = scs;
         //配置桌面图标
         win10_store.state.bottomLeftIcon = [{
             //显示的图标，fa 图标库中的一个图标

@@ -28,6 +28,8 @@ var win10_store = new Vuex.Store({
         bottomLeftIcon : [],
         //右下角的隐藏图标
         htask : [],
+        //是否隐藏底部任务栏
+        hideTaskBar : false,
         //消息
         messages : [],
         //程序图标
@@ -40,21 +42,33 @@ var win10_store = new Vuex.Store({
             "default" : "zh-cn",
             "zh-cn" : {
                 messageCenter : "消息中心",
-                clearAll : "全部清除"
+                clearAll : "全部清除",
+                keep : "保持"
             },
             "en" : {
                 messageCenter : "Messages",
-                clearAll : "clear"
+                clearAll : "clear",
+                keep : "keep"
+            },
+            icon : {
+                "zh-cn" : {
+                    next : "下一页",
+                    pre : "上一页"
+                },
+                "en" : {
+                    next : "next",
+                    pre : "previous"
+                }
             }
         },
         //图标的大小
         iconSize : {
-            width : 50,  //图标的长度
-            height : 53  //图标的宽度
+            width : 80,  //图标的长度
+            height : 83  //图标的宽度
         },
         //磁贴宽度
         margentPanelWidth : 300,
-        desktopBg : {}
+        desktopBg : {},
     }
 });
 
@@ -87,11 +101,17 @@ var extMethod = {
 //win10 整体 UI 组件
 Vue.component(iPrefix + 'win10',{
     template :
-        '<div id="win10" @click="hideAll">\
-            <!-- 桌面部分 -->\
-            <div @click="toggle(\'Null\')" class="desktop" :style="desktopBg">\
-                <div id="win10-shortcuts">\
-                    <' + prefix + 'shortcut  v-for="(shortcut,index) in shortcuts" :key="shortcut.id" v-bind:shortcut="shortcut" v-bind:index="index">\
+    '<div id="win10" @click="hideAll">\
+        <!-- 桌面部分 -->\
+        <div @click="toggle(\'Null\')" class="desktop" :style="desktopBg">\
+            <div id="win10-shortcuts">\
+                    <!-- 向上翻页 -->\
+                    <' + prefix + 'shortcut ref="sc" :key="\'left\'" v-bind:shortcut="pageTurn.left" v-bind:index="-1" v-show="pageTurn.left.show" @invok="iconEvent">\
+                    </' + prefix + 'shortcut>\
+                    <' + prefix + 'shortcut ref="sc"  v-for="(shortcut,index) in shortcuts" :key="shortcut.id" v-bind:shortcut="shortcut" @invok="iconEvent" v-bind:index="index">\
+                    </' + prefix + 'shortcut>\
+                    <!-- 向下翻页 -->\
+                    <' + prefix + 'shortcut ref="sc"  :key="\'right\'" v-bind:shortcut="pageTurn.right" v-bind:index="-2" v-show="pageTurn.right.show" @invok="iconEvent">\
                     </' + prefix + 'shortcut>\
                 </div>\
             </div>\
@@ -113,6 +133,7 @@ Vue.component(iPrefix + 'win10',{
             <div ref="command" id="win10_command_center">\
                 <div class="title">\
                     <h4 style="float: left">{{lang.messageCenter}} </h4>\
+                    <span @click="keep(\'Command\',$event)" toggleAttr="color!#03A9F4!gray" style="color: grey;text-align: right;font-size: 12px;float: right;margin-top: 40px;margin-right: 24px;transition: color 0.5s;">{{lang.keep}}</span>\
                     <span @click="removeMessage(-1)" style="color: grey;text-align: right;font-size: 12px;float: right;margin-top: 40px;margin-right: 24px;transition: color 0.5s;">{{lang.clearAll}}</span>\
                 </div>\
                 <div class="msgs">\
@@ -120,7 +141,7 @@ Vue.component(iPrefix + 'win10',{
                 </div>\
             </div>\
             <!-- 任务栏 -->\
-            <div id="win10_task_bar">\
+            <div ref="win10_task_bar" id="win10_task_bar">\
                 <!-- 开始按钮和默认软件 -->\
                 <div id="win10_btn_group_left" class="btn_group">\
                     <!-- 开始按钮 -->\
@@ -189,7 +210,40 @@ Vue.component(iPrefix + 'win10',{
                 main : {},
                 menu : {},
                 margent : {}
-            }
+            },
+            keepOpen : [],
+            pageTurn : {
+                left : {
+                    //默认参数
+                    x : 0,y : 0,
+                    //用于标记
+                    id : "pre-left",
+                    //图标
+                    icon : "fa-caret-left fa",
+                    //标题
+                    title : "pre",
+                    show : false,
+                    click : "pageTurnExec",
+                    clickParam : -1,
+                    i18n : true
+                },
+                right : {
+                    //默认参数
+                    x : 0,y : 0,
+                    //用于标记
+                    id : "next-right",
+                    //图标
+                    icon : "fa-caret-right fa",
+                    //标题
+                    title : "next",
+                    show : false,
+                    click : "pageTurnExec",
+                    clickParam : 1,
+                    i18n : true
+                }
+            },
+            //当有多页 图标 时，分页显示
+            curIconPage : 0
         }
     },
     computed : {
@@ -243,6 +297,9 @@ Vue.component(iPrefix + 'win10',{
         },
         desktopBg : function () {
             return win10_store.state.desktopBg;
+        },
+        hideTaskBar : function () {
+            return win10_store.state.hideTaskBar;
         }
     },
     watch : {
@@ -265,22 +322,49 @@ Vue.component(iPrefix + 'win10',{
             }
         },
         curLang : function () {
-            Win10._lang = this.curLang;
+            // Win10._lang = this.curLang;
         },
         screen : function (newV,oldV) {
-            if (oldV.y == newV.y && this.shortcutRender) {
+            if (this.shortcutRender) {
                 //todo 这里可能涉及到如果一个面无法放入所有的图标，是否考虑使用两个面板进行放置
                 return false;
             } else {
                 this.shortcutRender = true;
-                for (var i = 0;i < this.shortcuts.length;i++) {
-                    this.shortcuts[i].x = parseInt(i / newV.y);
-                    this.shortcuts[i].y = i % newV.y;
+                if (this.shortcuts.length > newV.x * newV.y) {
+                    var i = 0;
+                    for (i = 0;i < newV.x * newV.y - 1;i++) {
+                        this.shortcuts[i].x = parseInt(i / newV.y);
+                        this.shortcuts[i].y = i % newV.y;
+                    }
+                    for (;i < this.shortcuts.length;i++) {
+                        this.shortcuts[i].x = newV.x + 2;
+                        this.shortcuts[i].y = newV.y;
+                    }
+                    this.pageTurn.left.show = false;
+                    this.pageTurn.right.show = true;
+                    this.pageTurn.right.x = newV.x - 1;
+                    this.pageTurn.right.y = newV.y - 1;
+                    this.curIconPage = 0;
+                } else {
+                    this.shortcuts.forEach(function (shortcut,ind) {
+                        shortcut.x = parseInt(ind / newV.y);
+                        shortcut.y = ind % newV.y;
+                    }.bind(this));
+                    this.pageTurn.left.show = false;
+                    this.pageTurn.right.show = false;
                 }
             }
         },
         shortcuts : function () {
             this.shortcutRender = false;
+            this.windowResize();
+        },
+        hideTaskBar : function (newV) {
+            if (newV) {
+                this.$refs.win10_task_bar.style.display = "none";
+            } else {
+                this.$refs.win10_task_bar.style.display = "block";
+            }
             this.windowResize();
         }
     },
@@ -314,8 +398,9 @@ Vue.component(iPrefix + 'win10',{
             //重新计算一个屏幕可以如何放置图标
             this.screen = {
                 x : parseInt(document.body.clientWidth / win10_store.state.iconSize.width),
-                y : parseInt((document.body.clientHeight - 40) / win10_store.state.iconSize.height)
+                y : parseInt((document.body.clientHeight - (this.hideTaskBar ? 0 : 40)) / win10_store.state.iconSize.height)
             };
+            this.shortcutRender = false;
             //重新调整消息中心的宽度
             this.commandCenter = Object.assign(this.commandCenter,{width : document.body.clientWidth});
             if (this.commandCenter.width < this.commandCenter.minWidth) {} else {
@@ -344,10 +429,10 @@ Vue.component(iPrefix + 'win10',{
                     display : "none",
                     width : (sw - 47) + "px"
                 };
-                win10_store.state.iconSize = {
-                    width : (sw - 60) / 6,  //图标的长度
-                    height : (sw - 56) / 6 //图标的宽度
-                };
+                // win10_store.state.iconSize = {
+                //     width : (sw - 60) / 6,  //图标的长度
+                //     height : (sw - 56) / 6 //图标的宽度
+                // };
             } else {
                 this.startMenuStyle.main = {};
                 this.startMenuStyle.menu = {
@@ -358,10 +443,10 @@ Vue.component(iPrefix + 'win10',{
                     width : "310px"
                 };
                 this.startMenuStyle.mobile = false;
-                win10_store.state.iconSize = {
-                    width : 50,  //图标的长度
-                    height : 53  //图标的宽度
-                };
+                // win10_store.state.iconSize = {
+                //     width : 50,  //图标的长度
+                //     height : 53  //图标的宽度
+                // };
             }
         },
         showHTaskContent : function () {
@@ -380,7 +465,7 @@ Vue.component(iPrefix + 'win10',{
             if (this.showMsg.startMenu) {
                 this.$refs.startMenu.style.bottom = "-100%";
             } else {
-                this.$refs.startMenu.style.bottom = "41px";
+                this.$refs.startMenu.style.bottom = this.hideTaskBar ? "0px" : "41px";
             }
             this.showMsg.startMenu = !this.showMsg.startMenu;
         },
@@ -395,6 +480,8 @@ Vue.component(iPrefix + 'win10',{
                 this.$refs.command.style.right = "-" + this.commandCenter.width + "px";
             } else {
                 this.$refs.command.style.right = "0px";
+                this.$refs.command.style.height = this.hideTaskBar ? "100%" : "calc(100% - 42px)";
+                this.$refs.command.style.bottom = this.hideTaskBar ? "0" : "41px";
             }
             this.showMsg.command = !this.showMsg.command;
         },
@@ -416,10 +503,43 @@ Vue.component(iPrefix + 'win10',{
                     if (toggleMethod[i] == tar) {
                         this["toggle" + tar]();
                     } else {
-                        this["toggle" + toggleMethod[i]]("hide");
+                        if (this.keepOpen.indexOf(toggleMethod[i]) + 1) {
+                            continue;
+                        } else {
+                            this["toggle" + toggleMethod[i]]("hide");
+                        }
                     }
                 }
             }
+        },
+        /**
+         * 点击元素可以定义一个 toggleAttr 属性，定义方法为
+         * 属性一!keep=true时的取值!keep=false时的取值,属性二!.....
+         * attr ! value1 ! value2 , attr1 ! value1 ! value2
+         * */
+        keep : function(tar,$event){
+            var keep = false;
+            if (this.keepOpen.indexOf(tar) + 1) {
+                this.keepOpen.splice(this.keepOpen.indexOf(tar),1);
+                keep = false;
+            } else {
+                this.keepOpen.push(tar);
+                keep = true;
+            }
+            if ($event && $event.target && $event.target.getAttribute) {
+                var target = $event.target.style;
+                $event.target.getAttribute("toggleAttr").split(",").forEach(function (atr) {
+                    var atrs = atr.split("!");
+                    if (atrs.length == 3) {
+                        if (keep) {
+                            target[atrs[0]] = atrs[1];
+                        } else {
+                            target[atrs[0]] = atrs[2];
+                        }
+                    }
+                });
+            }
+
         },
         //关闭消息窗体
         removeMessage : function (ind) {
@@ -442,6 +562,56 @@ Vue.component(iPrefix + 'win10',{
             if (this.margent.length > ind) {
                 this.margentTop[ind + 1] = obj.top;
             }
+        },
+        iconEvent : function(tar,param) {
+            this[tar](param);
+        },
+        pageTurnExec : function (tar) {
+            this.curIconPage = this.curIconPage + tar;
+            var total = this.screen.x * this.screen.y - 2,
+                to = total * (this.curIconPage + 1) + 1,
+                from = total * this.curIconPage,
+                i,
+                j;
+            if (to > this.shortcuts.length) {
+                to = this.shortcuts.length;
+            }
+            if (from == 0) {
+                this.pageTurn.left.show = false;
+                this.pageTurn.right.show = true;
+                this.pageTurn.right.x = this.screen.x - 1;
+                this.pageTurn.right.y = this.screen.y - 1;
+            } else {
+                this.pageTurn.left.show = true;
+                this.pageTurn.left.x = 0;
+                this.pageTurn.left.y = 0;
+                if (to != this.shortcuts.length) {
+                    this.pageTurn.right.show = true;
+                    this.pageTurn.right.x = this.screen.x - 1;
+                    this.pageTurn.right.y = this.screen.y - 1;
+                    i = 1;
+                } else {
+                    i = 0;
+                    this.pageTurn.right.show = false;
+                }
+            }
+            if (from) {
+                for (j = 0;j <= from;j++) {
+                    this.shortcuts[j].x = this.shortcuts[j].y = -1;
+                }
+                i = 1;
+            } else {
+                j = from;
+                i = 0;
+            }
+            for (;j < to;j++,i++) {
+                this.shortcuts[j].x = parseInt(i / this.screen.y);
+                this.shortcuts[j].y = i % this.screen.y;
+            }
+            for (j = to;j < this.shortcuts.length;j++) {
+                this.shortcuts[j].x = this.screen.x + 2;
+                this.shortcuts[j].y = this.screen.y;
+            }
         }
     }
 });
@@ -449,9 +619,9 @@ Vue.component(iPrefix + 'win10',{
 //桌面图标组件
 Vue.component(iPrefix + "shortcut",{
     template :
-        '<div :style="shortcutStyle" class="shortcut" :index="index" @click="shortcut.click">\
-            <img class="icon" :src="shortcut.img"/>\
-            <div class="title">{{shortcut.title}}</div>\
+        '<div :style="shortcutStyle" class="shortcut" :index="index" @click="invoke()">\
+            <div class="icon" v-html="icon"></div>\
+            <div class="title">{{sTitle}}</div>\
         </div>',
     props : ['shortcut','index'],
     computed : {
@@ -459,6 +629,29 @@ Vue.component(iPrefix + "shortcut",{
             return {
                 top : (this.shortcut.y * win10_store.state.iconSize.height) + "px",
                 left : (this.shortcut.x * win10_store.state.iconSize.width) + "px"
+            }
+        },
+        sTitle : function () {
+            if (this.shortcut.i18n) {
+                return win10_store.state.lang.icon[win10_store.state.lang.cur][this.shortcut.title];
+            } else {
+                return this.shortcut.title;
+            }
+        },
+        icon : function () {
+            if (this.shortcut.img) {
+                return '<img style="width: 100%;height: 100%;" src="' + this.shortcut.img + '"/>';
+            } else {
+                return '<span class="' + this.shortcut.icon + '"></span>'
+            }
+        }
+    },
+    methods : {
+        invoke : function () {
+            if (typeof this.shortcut.click == "function") {
+                this.shortcut.click();
+            } else {
+                this.$emit("invok",this.shortcut.click,this.shortcut.clickParam);
             }
         }
     }
@@ -585,11 +778,11 @@ Vue.component(iPrefix + "htask",{
 //消息组件
 Vue.component(iPrefix + "message",{
     template :
-        '<div :class="message.msgClass || \'msg\'">' +
-            '<div class="title" v-html="message.title"></div>'+
-            '<div class="content" v-html="message.content"></div>' +
-            '<span class="btn_close_msg fa fa-close" @click="close"></span>' +
-        '</div>',
+    '<div :class="message.msgClass || \'msg\'">' +
+    '<div class="title" v-html="message.title"></div>'+
+    '<div class="content" v-html="message.content"></div>' +
+    '<span class="btn_close_msg fa fa-close" @click="close"></span>' +
+    '</div>',
     props : ['message','ind'],
     methods : {
         close : function () {
