@@ -11,8 +11,10 @@
     <script type="text/javascript" src="./component/layer-v3.0.3/layer/layer.js"></script>
     <link rel="stylesheet" href="./component/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="./css/default.css" rel="stylesheet">
+    <link href="./css/window-loading.css" rel="stylesheet">
     <script type="text/javascript" src="./js/vue.min.js"></script>
     <script type="text/javascript" src="./js/vuex.js"></script>
+    <script type="text/javascript" src="./vue_module/loading.js"></script>
     <script type="text/javascript" src="./vue_module/core.js"></script>
     <style>
         * {
@@ -33,7 +35,10 @@
     </style>
 </head>
 <body>
-    <div id="e1" style="width: 100%;height:100%;">
+<div id="loading">
+    <loading :message="message" v-show="loading"></loading>
+</div>
+<div id="e1" style="width: 100%;height:100%;">
         <win10></win10>
     </div>
 </body>
@@ -207,6 +212,13 @@
             "background-size" : "100% 100%"
         };
     }();
+    var loading = new Vue({
+        el : "#loading",
+        data : {
+            message : "",
+            loading : false
+        }
+    });
     var win10 = new Vue({
         el : "#e1"
     });

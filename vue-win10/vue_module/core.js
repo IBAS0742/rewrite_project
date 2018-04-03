@@ -29,7 +29,7 @@ var win10_store = new Vuex.Store({
         //右下角的隐藏图标
         htask : [],
         //是否隐藏底部任务栏
-        hideTaskBar : false,
+        hideTaskBar : true,
         //消息
         messages : [],
         //程序图标
@@ -360,15 +360,12 @@ Vue.component(iPrefix + 'win10',{
             this.windowResize();
         },
         hideTaskBar : function (newV) {
-            if (newV) {
-                this.$refs.win10_task_bar.style.display = "none";
-            } else {
-                this.$refs.win10_task_bar.style.display = "block";
-            }
-            this.windowResize();
+            this.toggleTaskBar();
         }
     },
     mounted : function () {
+        var w_l = function () {},
+            $this = this;
         this.hidden_task = $("#win10_hide_task_ibas");
         var hidden_task_size = extMethod.hideTaskSize(this.htask.length);
         if (hidden_task_size) {
@@ -386,13 +383,28 @@ Vue.component(iPrefix + 'win10',{
         this.bottom_middle_bar[0].style.width = "calc(100% - " + (184 + this.bottomLeftIcon.length * 48 + (hidden_task_size ? 32 : 0)) + "px)";
         this.toggleMenu();
         this.toggleCommand();
-        window.onresize = this.windowResize.bind(this);
+        if (typeof window.onresize == 'function') {
+            w_l = window.onresize;
+        }
+        window.onresize = function() {
+            w_l();
+            $this.windowResize.bind($this);
+        };
         this.windowResize();
         setInterval(function () {
             this.$refs.time.innerHTML = extMethod.getTime();
         }.bind(this),1000);
+        this.toggleTaskBar();
     },
     methods : {
+        toggleTaskBar : function() {
+            if (this.hideTaskBar) {
+                this.$refs.win10_task_bar.style.display = "none";
+            } else {
+                this.$refs.win10_task_bar.style.display = "block";
+            }
+            this.windowResize();
+        },
         //屏幕大小改变事件
         windowResize : function () {
             //重新计算一个屏幕可以如何放置图标
@@ -496,7 +508,7 @@ Vue.component(iPrefix + 'win10',{
         toggle : function (tar) {
             var toggleMethod = [
                 "Menu",
-                "Command"
+                "Command",
             ];
             if (tar && this["toggle" + tar]) {
                 for (var i = 0;i < toggleMethod.length;i++) {
