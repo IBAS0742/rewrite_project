@@ -1,6 +1,6 @@
 ## 说明
 ### 这个系统主体框架是使用 [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue)
-### 我致力于将所有【NODE】相关工具集合到这里
+### 我将会把所有【NODE】相关工具集合到这里
 
 ## 功能【Function】
 * [x] Vue 国际化可视化工具
