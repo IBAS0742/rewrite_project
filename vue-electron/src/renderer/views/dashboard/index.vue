@@ -1,50 +1,61 @@
 <template>
   <div class="dashboard-container">
     <div style="padding: 0.5em;width: 100%;display: inline-block;">
-      <el-switch
+      <Switch
               v-model="autoCloseMessage"
               active-color="#13ce66"
               inactive-color="#999999">
-      </el-switch>自动关闭消息
+      </Switch>自动关闭消息
     </div>
-    <el-row :gutter="10">
-      <el-col v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">
-        <el-card class="box-card">
+    <Row :gutter="10">
+      <Col v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">
+        <Card class="box-card">
           <div slot="header" class="clearfix">
             <span>{{card.title}}</span>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="$router.push(card.route)">前往</el-button>
+            <Button style="float: right; padding: 3px 0" type="text" @click="$router.push(card.route)">前往</Button>
           </div>
           <div style="font-size: 1.2em">功能</div>
           <div style="padding: 0.2em">
             <div v-for="fun in card.function" :key="fun.name" style="display: inline-block;width: 100%;">
-              <el-button style="padding: 3px 0" type="text" class="text item" @click="showDesc(fun)">
+              <Button style="padding: 3px 0" type="text" class="text item" @click="showDesc(fun)">
                 {{fun.name}}
-              </el-button>
+              </Button>
             </div>
           </div>
           <hr/>
           <div style="font-size: 1.2em">说明</div>
           <div style="padding: 0.2em">
             <div style="display: inline-block;width: 100%;">
-              <el-button style="padding: 3px 0" type="text" class="text item" @click="showDetail(card)">
+              <Button style="padding: 3px 0" type="text" class="text item" @click="showDetail(card)">
                 查看
-              </el-button>
+              </Button>
             </div>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-dialog title="说明" :visible.sync="dialogTableVisible">
+        </Card>
+      </Col>
+    </Row>
+    <Dialog title="说明" :visible.sync="dialogTableVisible">
       <div v-html="dialogContent.detail"></div>
-    </el-dialog>
+    </Dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
+import 'element-ui/lib/theme-chalk/index.css'
+import { Switch, Row, Col, Dialog, Button, Card } from 'element-ui'
+
 export default {
   name: 'dashboard',
+  components: {
+      Switch,
+      Row,
+      Col,
+      Dialog,
+      Button,
+      Card
+  },
   data() {
     return {
       autoCloseMessage: false,

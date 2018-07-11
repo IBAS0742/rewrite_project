@@ -1,48 +1,51 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
+  <Menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <el-dropdown style="float: right;right: 80px;" trigger="click">
+    <Dropdown style="float: right;right: 80px;" trigger="click">
       <span class="el-dropdown-link">
         国际化【{{curLanguage}}】
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>
+      <DropdownMenu slot="dropdown">
+        <DropdownItem>
           <span @click="changeLang('CN')">中文</span>
-        </el-dropdown-item>
-        <el-dropdown-item>
+        </DropdownItem>
+        <DropdownItem>
           <span @click="changeLang('EN')">English</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
-        <i class="el-icon-caret-bottom"></i>
-      </div>
-      <el-dropdown-menu class="user-dropdown" slot="dropdown">
-        <router-link class="inlineBlock" to="/">
-          <el-dropdown-item>
-            Home
-          </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">LogOut</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-  </el-menu>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+    <!--<el-dropdown class="avatar-container" trigger="click">-->
+      <!--<div class="avatar-wrapper">-->
+        <!--<img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">-->
+        <!--<i class="el-icon-caret-bottom"></i>-->
+      <!--</div>-->
+      <!--<el-dropdown-menu class="user-dropdown" slot="dropdown">-->
+        <!--<router-link class="inlineBlock" to="/">-->
+          <!--<el-dropdown-item>-->
+            <!--Home-->
+          <!--</el-dropdown-item>-->
+        <!--</router-link>-->
+        <!--<el-dropdown-item divided>-->
+          <!--<span @click="logout" style="display:block;">LogOut</span>-->
+        <!--</el-dropdown-item>-->
+      <!--</el-dropdown-menu>-->
+    <!--</el-dropdown>-->
+  </Menu>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import 'element-ui/lib/theme-chalk/index.css'
+import { Menu, Dropdown, DropdownItem, DropdownMenu } from 'element-ui'
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    Menu, Dropdown, DropdownItem, DropdownMenu
   },
   computed: {
     ...mapGetters([

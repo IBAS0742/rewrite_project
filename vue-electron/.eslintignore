@@ -1,3 +1,5 @@
 build/*.js
 src/renderer/assets/**
 dist/**
+src/renderer/template/**
+src/renderer/views/vue-editor/ydui/extern/**

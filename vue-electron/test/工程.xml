@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <language>
+        <lang desc="未定义语言">YN</lang>
+    </language>
+    <i18n>
+        <node name="home" desc="">
+            <node name="menus" desc="">
+                <node name="mainPage" desc="">
+                    <lang>
+                        <yn>main</yn>
+                    </lang>
+                </node>,
+                <node name="list" desc="">
+                    <lang>
+                        <yn>list</yn>
+                    </lang>
+                </node>,
+                <node name="user" desc="">
+                    <lang>
+                        <yn>user</yn>
+                    </lang>
+                </node>
+            </node>,
+            <node name="icons" desc="">
+                <node name="checkWindow" desc="提示一下吧">
+                    <lang>
+                        <yn>windows</yn>
+                    </lang>
+                </node>
+            </node>,
+            <node name="account" desc="">
+                <node name="login" desc="">
+                    <lang>
+                        <yn>login</yn>
+                    </lang>
+                </node>,
+                <node name="loginUserName" desc="">
+                    <lang>
+                        <yn>uname</yn>
+                    </lang>
+                </node>,
+                <node name="loginUserNamePlaceholder" desc="">
+                    <lang>
+                        <yn>please input username</yn>
+                    </lang>
+                </node>,
+                <node name="loginPassword" desc="">
+                    <lang>
+                        <yn>pass</yn>
+                    </lang>
+                </node>,
+                <node name="loginPasswordPlaceholder" desc="">
+                    <lang>
+                        <yn>please input password</yn>
+                    </lang>
+                </node>,
+                <node name="loginLoginBtnLabel" desc="">
+                    <lang>
+                        <yn>login</yn>
+                    </lang>
+                </node>,
+                <node name="loginRegisterBtnLabel" desc="">
+                    <lang>
+                        <yn>register</yn>
+                    </lang>
+                </node>,
+                <node name="register" desc="">
+                    <lang>
+                        <yn>register</yn>
+                    </lang>
+                </node>,
+                <node name="registerUserName" desc="">
+                    <lang>
+                        <yn>uname</yn>
+                    </lang>
+                </node>,
+                <node name="registerUserNamePlaceholder" desc="">
+                    <lang>
+                        <yn>please input username</yn>
+                    </lang>
+                </node>,
+                <node name="registerPassword" desc="">
+                    <lang>
+                        <yn>pass</yn>
+                    </lang>
+                </node>,
+                <node name="registerPasswordPlaceholder" desc="">
+                    <lang>
+                        <yn>please input password</yn>
+                    </lang>
+                </node>,
+                <node name="registerLoginBtnLabel" desc="">
+                    <lang>
+                        <yn>login</yn>
+                    </lang>
+                </node>,
+                <node name="registerRegisterBtnLabel" desc="">
+                    <lang>
+                        <yn>register</yn>
+                    </lang>
+                </node>
+            </node>
+        </node>,
+        <node name="window" desc="">
+            <node name="main" desc="">
+                <node name="title" desc="">
+                    <lang>
+                        <yn>window</yn>
+                    </lang>
+                </node>,
+                <node name="loginFirst" desc="">
+                    <lang>
+                        <yn>please login first</yn>
+                    </lang>
+                </node>,
+                <node name="checkwindow" desc="">
+                    <lang>
+                        <yn>check window</yn>
+                    </lang>
+                </node>,
+                <node name="repairs" desc="">
+                    <lang>
+                        <yn>repairs</yn>
+                    </lang>
+                </node>,
+                <node name="checkList" desc="">
+                    <lang>
+                        <yn>check list</yn>
+                    </lang>
+                </node>,
+                <node name="repairsList" desc="">
+                    <lang>
+                        <yn>repairs list</yn>
+                    </lang>
+                </node>,
+                <node name="addCheck" desc="">
+                    <lang>
+                        <yn>add</yn>
+                    </lang>
+                </node>
+            </node>,
+            <node name="add" desc="">
+                <node name="handAdd" desc="">
+                    <lang>
+                        <yn>handle add</yn>
+                    </lang>
+                </node>,
+                <node name="copyFromOther" desc="">
+                    <lang>
+                        <yn>copy from old project</yn>
+                    </lang>
+                </node>,
+                <node name="copyFromTemplate" desc="">
+                    <lang>
+                        <yn>copy from template</yn>
+                    </lang>
+                </node>,
+                <node name="title" desc="">
+                    <lang>
+                        <yn>选择添加方式</yn>
+                    </lang>
+                </node>
+            </node>,
+            <node name="fields" desc="">
+                <node name="uid" desc="">
+                    <lang>
+                        <yn>uid</yn>
+                    </lang>
+                </node>,
+                <node name="ufullname" desc="">
+                    <lang>
+                        <yn>full name</yn>
+                    </lang>
+                </node>,
+                <node name="uenglishName" desc="">
+                    <lang>
+                        <yn>english name</yn>
+                    </lang>
+                </node>,
+                <node name="ucertifyId" desc="">
+                    <lang>
+                        <yn>certify no</yn>
+                    </lang>
+                </node>,
+                <node name="ucertifyEnd" desc="">
+                    <lang>
+                        <yn>certify endtime</yn>
+                    </lang>
+                </node>,
+                <node name="uemail" desc="">
+                    <lang>
+                        <yn>email</yn>
+                    </lang>
+                </node>,
+                <node name="uphone" desc="">
+                    <lang>
+                        <yn>phone</yn>
+                    </lang>
+                </node>,
+                <node name="ufaxNo" desc="">
+                    <lang>
+                        <yn>fax</yn>
+                    </lang>
+                </node>,
+                <node name="uaddress" desc="">
+                    <lang>
+                        <yn>address</yn>
+                    </lang>
+                </node>,
+                <node name="stepOneTitle" desc="">
+                    <lang>
+                        <yn>添加验窗工程</yn>
+                    </lang>
+                </node>
+                <node name="stepTwoTitle" desc="">
+                    <lang>
+                        <yn>添加监理人信息</yn>
+                    </lang>
+                </node>
+            </node>
+        </node>
+    </i18n>
+</root>

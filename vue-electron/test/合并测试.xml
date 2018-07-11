@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <language>
+        <lang desc="中文">CN</lang>
+        <lang desc="英文">EN</lang>
+    </language>
+    <i18n>
+        <node name="home" desc="">
+            <node name="menus" desc="">
+                <node name="mainPage" desc="">
+                    <lang>
+                        <cn>主页</cn>
+                        <en>main</en>
+                    </lang>
+                </node>,
+                <node name="list" desc="">
+                    <lang>
+                        <cn>列表</cn>
+                        <en>list</en>
+                    </lang>
+                </node>,
+                <node name="user" desc="">
+                    <lang>
+                        <cn>用户中心</cn>
+                        <en>user</en>
+                    </lang>
+                </node>
+            </node>,
+            <node name="icons" desc="">
+                <node name="checkWindow" desc="">
+                    <lang>
+                        <cn>验窗</cn>
+                        <en>windows</en>
+                    </lang>
+                </node>
+            </node>,
+            <node name="account" desc="">
+                <node name="login" desc="">
+                    <lang>
+                        <cn>登陆</cn>
+                        <en>login</en>
+                    </lang>
+                </node>,
+                <node name="loginUserName" desc="">
+                    <lang>
+                        <cn>用户名</cn>
+                        <en>uname</en>
+                    </lang>
+                </node>,
+                <node name="loginUserNamePlaceholder" desc="">
+                    <lang>
+                        <cn>请输入用户名</cn>
+                        <en>please input username</en>
+                    </lang>
+                </node>,
+                <node name="loginPassword" desc="">
+                    <lang>
+                        <cn>密　码</cn>
+                        <en>pass</en>
+                    </lang>
+                </node>,
+                <node name="loginPasswordPlaceholder" desc="">
+                    <lang>
+                        <cn>请输入密码</cn>
+                        <en>please input password</en>
+                    </lang>
+                </node>,
+                <node name="loginLoginBtnLabel" desc="">
+                    <lang>
+                        <cn>登陆</cn>
+                        <en>login</en>
+                    </lang>
+                </node>,
+                <node name="loginRegisterBtnLabel" desc="">
+                    <lang>
+                        <cn>注册</cn>
+                        <en>register</en>
+                    </lang>
+                </node>,
+                <node name="register" desc="">
+                    <lang>
+                        <cn>注册</cn>
+                        <en>register</en>
+                    </lang>
+                </node>,
+                <node name="registerUserName" desc="">
+                    <lang>
+                        <cn>用户名</cn>
+                        <en>uname</en>
+                    </lang>
+                </node>,
+                <node name="registerUserNamePlaceholder" desc="">
+                    <lang>
+                        <cn>请输入用户名</cn>
+                        <en>please input username</en>
+                    </lang>
+                </node>,
+                <node name="registerPassword" desc="">
+                    <lang>
+                        <cn>密　码</cn>
+                        <en>pass</en>
+                    </lang>
+                </node>,
+                <node name="registerPasswordPlaceholder" desc="">
+                    <lang>
+                        <cn>请输入密码</cn>
+                        <en>please input password</en>
+                    </lang>
+                </node>,
+                <node name="registerLoginBtnLabel" desc="">
+                    <lang>
+                        <cn>登陆</cn>
+                        <en>login</en>
+                    </lang>
+                </node>,
+                <node name="registerRegisterBtnLabel" desc="">
+                    <lang>
+                        <cn>注册</cn>
+                        <en>register</en>
+                    </lang>
+                </node>
+            </node>
+        </node>,
+        <node name="window" desc="">
+            <node name="main" desc="">
+                <node name="title" desc="">
+                    <lang>
+                        <cn>验窗</cn>
+                        <en>window</en>
+                    </lang>
+                </node>,
+                <node name="loginFirst" desc="">
+                    <lang>
+                        <cn>请先登录</cn>
+                        <en>please login first</en>
+                    </lang>
+                </node>,
+                <node name="checkwindow" desc="">
+                    <lang>
+                        <cn>验窗</cn>
+                        <en>check window</en>
+                    </lang>
+                </node>,
+                <node name="repairs" desc="">
+                    <lang>
+                        <cn>维修</cn>
+                        <en>repairs</en>
+                    </lang>
+                </node>,
+                <node name="checkList" desc="">
+                    <lang>
+                        <cn>验窗列表</cn>
+                        <en>check list</en>
+                    </lang>
+                </node>,
+                <node name="repairsList" desc="">
+                    <lang>
+                        <cn>维修列表</cn>
+                        <en>repairs list</en>
+                    </lang>
+                </node>,
+                <node name="addCheck" desc="">
+                    <lang>
+                        <cn>添加</cn>
+                        <en>add</en>
+                    </lang>
+                </node>
+            </node>,
+            <node name="add" desc="">
+                <node name="handAdd" desc="">
+                    <lang>
+                        <cn>手动创建工程</cn>
+                        <en>handle add</en>
+                    </lang>
+                </node>,
+                <node name="copyFromOther" desc="">
+                    <lang>
+                        <cn>从其他工程拷贝</cn>
+                        <en>copy from old project</en>
+                    </lang>
+                </node>,
+                <node name="copyFromTemplate" desc="">
+                    <lang>
+                        <cn>从模板创建工程</cn>
+                        <en>copy from template</en>
+                    </lang>
+                </node>,
+                <node name="title" desc="">
+                    <lang>
+                        <cn>选择添加方式</cn>
+                        <en>选择添加方式</en>
+                    </lang>
+                </node>
+            </node>,
+            <node name="fields" desc="">
+                <node name="uid" desc="">
+                    <lang>
+                        <cn>uid</cn>
+                        <en>uid</en>
+                    </lang>
+                </node>,
+                <node name="ufullname" desc="">
+                    <lang>
+                        <cn>全名</cn>
+                        <en>full name</en>
+                    </lang>
+                </node>,
+                <node name="uenglishName" desc="">
+                    <lang>
+                        <cn>英文名</cn>
+                        <en>english name</en>
+                    </lang>
+                </node>,
+                <node name="ucertifyId" desc="">
+                    <lang>
+                        <cn>证书编号</cn>
+                        <en>certify no</en>
+                    </lang>
+                </node>,
+                <node name="ucertifyEnd" desc="">
+                    <lang>
+                        <cn>证书届满日期</cn>
+                        <en>certify endtime</en>
+                    </lang>
+                </node>,
+                <node name="uemail" desc="">
+                    <lang>
+                        <cn>邮箱</cn>
+                        <en>email</en>
+                    </lang>
+                </node>,
+                <node name="uphone" desc="">
+                    <lang>
+                        <cn>联系电话</cn>
+                        <en>phone</en>
+                    </lang>
+                </node>,
+                <node name="ufaxNo" desc="">
+                    <lang>
+                        <cn>传真</cn>
+                        <en>fax</en>
+                    </lang>
+                </node>,
+                <node name="uaddress" desc="">
+                    <lang>
+                        <cn>居住地址</cn>
+                        <en>address</en>
+                    </lang>
+                </node>,
+                <node name="stepOneTitle" desc="">
+                    <lang>
+                        <cn>添加验窗工程</cn>
+                        <en>添加验窗工程</en>
+                    </lang>
+                </node>,
+                <node name="stepTwoTitle" desc="">
+                    <lang>
+                        <cn>添加监理人信息</cn>
+                        <en>添加监理人信息</en>
+                    </lang>
+                </node>
+            </node>
+        </node>
+    </i18n>
+</root>

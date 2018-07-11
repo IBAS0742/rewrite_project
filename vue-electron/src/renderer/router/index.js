@@ -22,9 +22,7 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
-
   {
     path: '/',
     component: Layout,
@@ -45,6 +43,43 @@ export const constantRouterMap = [
         name: 'i18n',
         component: () => import('@/views/i18n/index'),
         meta: { title: 'i18n', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/vue-editor',
+    redirect: '/vue-editor/element',
+    component: Layout,
+    meta: { title: '模板' },
+    children: [
+      {
+        path: 'element',
+        name: 'vue-editor-element',
+        component: () => import('@/views/vue-editor/element/index'),
+        meta: { title: 'element', icon: 'form' }
+      },
+      {
+        path: 'iview',
+        name: 'vue-editor-iview',
+        component: () => import('@/views/vue-editor/iview/index'),
+        meta: {
+          title: 'iview',
+          icon: 'form'
+        }
+      },
+      {
+        path: 'ydui',
+        name: 'vue-editor-ydui',
+        component: () => import('@/views/vue-editor/ydui/index'),
+        meta: {
+          title: 'ydui',
+          icon: 'form',
+            meta: {
+                viewport: 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0',
+                'apple-mobile-web-app-capable': 'yes',
+                'apple-mobile-web-app-status-bar-style': 'black'
+            }
+        }
       }
     ]
   },

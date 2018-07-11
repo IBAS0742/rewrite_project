@@ -1,10 +1,5 @@
 import Vue from 'vue'
-
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
-
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import App from './App'
 import router from './router'
@@ -23,16 +18,22 @@ Vue.use(VueI18n)
 Vue.config.productionTip = false
 
 const i18n = new VueI18n({
-  locale: 'EN', // set locale
+  locale: 'CN', // set locale
   messages: i18nConfig.i18n // set locale messages
 })
 
-Vue.use(ElementUI, {
-  i18n: (key, value) => {
-    console.log(key, value)
-    i18n.t(key, value)
-  }
-})
+import preComponentElement from './components/component/preComponentElement'
+Vue.component('preComponentElement', preComponentElement)
+import preComponentIView from './components/component/preComponentIView'
+Vue.component('preComponentIView', preComponentIView)
+import preComponentYdui from './components/component/preComponentYdui'
+Vue.component('preComponentYdui', preComponentYdui)
+// Vue.use(ElementUI, {
+//   i18n: (key, value) => {
+//     console.log(key, value)
+//     i18n.t(key, value)
+//   }
+// })
 
 store.state.router = constantRouterMap
 

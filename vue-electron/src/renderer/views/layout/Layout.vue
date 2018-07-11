@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper" :class="classObj">
-    <sidebar class="sidebar-container"></sidebar>
+    <Sidebar class="sidebar-container"></Sidebar>
     <div class="main-container">
-      <navbar></navbar>
-      <app-main></app-main>
+      <Navbar></Navbar>
+      <AppMain></AppMain>
     </div>
   </div>
 </template>

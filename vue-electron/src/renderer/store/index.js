@@ -5,13 +5,15 @@ import user from './modules/user'
 import getters from './getters'
 const dialog = require('electron').remote.dialog
 const ipc = require('electron').ipcRenderer
+const clipboard = require('electron').clipboard
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     dialog,
-    ipc
+    ipc,
+    clipboard
   },
   modules: {
     app,
