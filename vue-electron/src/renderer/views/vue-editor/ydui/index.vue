@@ -49,7 +49,7 @@
                     'hr': 0.3,
                     'background-color': '#f1f1f1'
                 },
-                activeName: 'first',
+                activeName: 1,
                 code: [
                     {
                         name: 'yd-button',
@@ -60,20 +60,50 @@
                         children: []
                     },
                     {
-                        name: 'yd-tag',
-                        id: 'second',
+                        name: 'yd-cell-group',
                         children: [
                             {
-                                name: 'yd-input',
+                                name: 'yd-input-sail',
                                 props: {
-                                    value: '内容'
-                                },
-                                attrs: {
+                                    label: '用户名',
                                     placeholder: '提示'
-                                },
-                                children: []
+                                }
                             }
                         ]
+                    },
+                    {
+                        name: 'yd-cell-group',
+                        children: [
+                            {
+                                name: 'yd-cell-item',
+                                children: [
+                                    {
+                                        name: 'span',
+                                        text: '用户名：',
+                                        slot: 'left'
+                                    },
+                                    {
+                                        name: 'yd-input',
+                                        domProps: {
+                                            placeholder: '提示'
+                                        },
+                                        slot: 'right'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        name: 'yd-grids-group',
+                        props: {
+                            rows: 2
+                        },
+                        children: {
+                            name: 'yd-grids-item',
+                            children: {
+                                name: 'img'
+                            }
+                        }
                     }
                 ]
             }

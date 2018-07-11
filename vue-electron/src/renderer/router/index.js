@@ -48,38 +48,51 @@ export const constantRouterMap = [
   },
   {
     path: '/vue-editor',
-    redirect: '/vue-editor/element',
+    redirect: '/vue-editor/list',
     component: Layout,
-    meta: { title: '模板' },
+    meta: { title: '模板定制', icon: 'form' },
     children: [
       {
-        path: 'element',
-        name: 'vue-editor-element',
-        component: () => import('@/views/vue-editor/element/index'),
-        meta: { title: 'element', icon: 'form' }
+        path: 'list',
+        meta: { title: 'list', icon: 'form' },
+        // 不知道为什么在 elm 中使用 elm 的 modal 出现问题，但是使用 iview 的却可以正常显示
+        component: () => import('@/views/vue-editor/list-iview')
       },
       {
-        path: 'iview',
-        name: 'vue-editor-iview',
-        component: () => import('@/views/vue-editor/iview/index'),
-        meta: {
-          title: 'iview',
-          icon: 'form'
-        }
-      },
-      {
-        path: 'ydui',
-        name: 'vue-editor-ydui',
-        component: () => import('@/views/vue-editor/ydui/index'),
-        meta: {
-          title: 'ydui',
-          icon: 'form',
+        path: 'make',
+        meta: { title: 'make', icon: 'form' },
+        component: () => import('@/views/vue-editor/index'),
+        children: [
+          {
+            path: 'element',
+            name: 'vue-editor-element',
+            component: () => import('@/views/vue-editor/element/index'),
+            meta: { title: 'element', icon: 'form' }
+          },
+          {
+            path: 'iview',
+            name: 'vue-editor-iview',
+            component: () => import('@/views/vue-editor/iview/index'),
             meta: {
+              title: 'iview',
+              icon: 'form'
+            }
+          },
+          {
+            path: 'ydui',
+            name: 'vue-editor-ydui',
+            component: () => import('@/views/vue-editor/ydui/index'),
+            meta: {
+              title: 'ydui',
+              icon: 'form',
+              meta: {
                 viewport: 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0',
                 'apple-mobile-web-app-capable': 'yes',
                 'apple-mobile-web-app-status-bar-style': 'black'
+              }
             }
-        }
+          }
+        ]
       }
     ]
   },

@@ -1,5 +1,5 @@
 import 'iview/dist/styles/iview.css'
-// import * as element from 'iview'
+import * as element from 'iview'
 
 export default {
     name: 'preComponentElement',
@@ -10,7 +10,7 @@ export default {
         }
     },
     components: {
-        // ...element
+        ...element
     },
     render(h) {
         const comps = []

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>演示Vue</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <tb-heading :level="2">
+        <a href="#">Hello world!</a>
+    </tb-heading>
+    <my-slot>
+        <div slot="name1">this is slot</div>
+        <div slot="name2">The position is slot2 </div>
+    </my-slot>
+    <test>
+        <div slot="one">ibas</div>
+    </test>
+    <for-test></for-test>
+</div>
+</body>
+<script src="./Vue2.3.0.js"></script>
+
+<script>
+    Vue.component('test',{
+        template: '<div><slot name="one"></slot></div>'
+    });
+
+    Vue.component('forTest',{
+        props: {
+            code: {
+                type: Object
+            }
+        },
+        render(h) {
+            console.log(this.$slots)
+            let a = h('div',{
+                slot: 'one'
+            }, 'ibas');
+            return h('test',{
+            },[a])
+        }
+    })
+
+    Vue.component('mySlot',{
+        render(h) {
+            var he=h('div',{domProps:{innerHTML:'this child div'}});
+            return h('div',[he,this.$slots.name2,this.$slots.name1]);
+        }
+    })
+
+    Vue.component('tb-heading', {
+        render: function(createElement) {
+            console.log(this.$slots)
+            return createElement(
+                'h' + this.level,    // tag name 标签名称
+                this.$slots.default  // 子组件
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    });
+    vm = new Vue({
+        el: '#container'
+    });
+</script>
+</html>
