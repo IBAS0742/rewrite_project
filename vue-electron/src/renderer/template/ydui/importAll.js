@@ -41,7 +41,7 @@ import {CheckList, CheckListItem} from 'vue-ydui/dist/lib.rem/checklist'
 import {Search} from 'vue-ydui/dist/lib.rem/search'
 import {ScrollNav, ScrollNavPanel} from 'vue-ydui/dist/lib.rem/scrollnav'
 
-const allComponent = {
+const ydui = {
     Button,
     ButtonGroup,
     CellGroup,
@@ -98,12 +98,8 @@ const allComponent = {
     ScrollNavPanel
 }
 
-export default {
-    ...(function (ac) {
-        const acs = {}
-        for (let i in ac) {
-            acs[ac[i].name] = ac[i]
-        }
-        return acs
-    })(allComponent)
+export const installYdui = (Vue) => {
+    for (const i in ydui) {
+        Vue.component('Yd' + i, ydui[i])
+    }
 }

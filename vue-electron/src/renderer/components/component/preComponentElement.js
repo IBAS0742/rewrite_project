@@ -1,5 +1,4 @@
 import 'element-ui/lib/theme-chalk/index.css'
-import * as element from 'element-ui'
 
 export default {
     name: 'preComponentElement',
@@ -8,24 +7,6 @@ export default {
             type: Object,
             required: true
         }
-    },
-    components: {
-        ...((element) => {
-            const ret = {}
-            for (const i in element) {
-                if (element[i].name && !(element[i] instanceof Function)) {
-                    // console.log(element[i].name)
-                    ret[element[i].name.replace(/[A-Z]/g, function(v, ind) {
-                        if (ind) {
-                            return '-' + v.toLowerCase()
-                        } else {
-                            return v.toLowerCase()
-                        }
-                    })] = element[i]
-                }
-            }
-            return ret
-        })(element)
     },
     render(h) {
         const comps = []

@@ -1,42 +1,42 @@
 <template>
   <div class="dashboard-container">
     <div style="padding: 0.5em;width: 100%;display: inline-block;">
-      <Switch
+      <ElmElSwitch
               v-model="autoCloseMessage"
               active-color="#13ce66"
               inactive-color="#999999">
-      </Switch>自动关闭消息
+      </ElmElSwitch>自动关闭消息
     </div>
-    <Row :gutter="10">
-      <Col v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">
-        <Card class="box-card">
+    <ElmElRow :gutter="10">
+      <ElmElCol v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">
+        <ElmElCard class="box-card">
           <div slot="header" class="clearfix">
             <span>{{card.title}}</span>
-            <Button style="float: right; padding: 3px 0" type="text" @click="$router.push(card.route)">前往</Button>
+            <ElmElButton style="float: right; padding: 3px 0" type="text" @click="$router.push(card.route)">前往</ElmElButton>
           </div>
           <div style="font-size: 1.2em">功能</div>
           <div style="padding: 0.2em">
             <div v-for="fun in card.function" :key="fun.name" style="display: inline-block;width: 100%;">
-              <Button style="padding: 3px 0" type="text" class="text item" @click="showDesc(fun)">
+              <ElmElButton style="padding: 3px 0" type="text" class="text item" @click="showDesc(fun)">
                 {{fun.name}}
-              </Button>
+              </ElmElButton>
             </div>
           </div>
           <hr/>
           <div style="font-size: 1.2em">说明</div>
           <div style="padding: 0.2em">
             <div style="display: inline-block;width: 100%;">
-              <Button style="padding: 3px 0" type="text" class="text item" @click="showDetail(card)">
+              <ElmElButton style="padding: 3px 0" type="text" class="text item" @click="showDetail(card)">
                 查看
-              </Button>
+              </ElmElButton>
             </div>
           </div>
-        </Card>
-      </Col>
-    </Row>
-    <Dialog title="说明" :visible.sync="dialogTableVisible">
+        </ElmElCard>
+      </ElmElCol>
+    </ElmElRow>
+    <ElmElDialog title="说明" :visible.sync="dialogTableVisible">
       <div v-html="dialogContent.detail"></div>
-    </Dialog>
+    </ElmElDialog>
   </div>
 </template>
 
@@ -44,18 +44,9 @@
 import { mapGetters } from 'vuex'
 
 import 'element-ui/lib/theme-chalk/index.css'
-import { Switch, Row, Col, Dialog, Button, Card } from 'element-ui'
 
 export default {
   name: 'dashboard',
-  components: {
-      Switch,
-      Row,
-      Col,
-      Dialog,
-      Button,
-      Card
-  },
   data() {
     return {
       autoCloseMessage: false,

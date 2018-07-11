@@ -21,7 +21,6 @@
 <!--<script src="./extern/fastclick.js"></script>-->
 <script>
     import preview from './preview'
-    import element from './../../../template/ydui/importAll'
     import 'vue-ydui/dist/ydui.base.css'
     require('./extern/ydui.flexible')
     require('./extern/fastclick')
@@ -29,8 +28,7 @@
     export default {
         name: 'vue-editor',
         components: {
-            preview,
-            ...element
+            preview
         },
         data() {
             return {
@@ -79,7 +77,7 @@
                                 children: [
                                     {
                                         name: 'span',
-                                        text: '用户名：',
+                                        text: '标签',
                                         slot: 'left'
                                     },
                                     {
@@ -111,7 +109,6 @@
         computed: {
         },
         mounted() {
-            window.element = element
             const $this = this
             this.$refs.dragBar.setAttribute('draggable', true)
             this.$refs.dragBar.ondrag = (e) => {

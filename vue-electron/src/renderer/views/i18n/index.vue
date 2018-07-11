@@ -1,125 +1,125 @@
 <template>
   <div style="padding-bottom: 1.5em;">
-    <Row style="padding: 0.5em;">
-      <Button :style="{color : (autoSaveXML.autoSave ? '#29d' : '#000')}" v-show="data5.length && data5[0].children && data5[0].children.length" @click="autoSaveXML.autoSave = !autoSaveXML.autoSave">
+    <ElmElRow style="padding: 0.5em;">
+      <ElmElButton :style="{color : (autoSaveXML.autoSave ? '#29d' : '#000')}" v-show="data5.length && data5[0].children && data5[0].children.length" @click="autoSaveXML.autoSave = !autoSaveXML.autoSave">
         {{$t('i18n.menu.autoSaveXML')}}
-      </Button>
-      <Button @click="open">{{$t('i18n.menu.openXML')}}</Button>
-      <Button @click="create">{{$t('i18n.menu.newXML')}} </Button>
-      <Button @click="save">{{$t('i18n.menu.saveXML')}}</Button>
-      <Button @click="output">{{$t('i18n.menu.outputJS')}}</Button>
-      <Button @click="input">{{$t('i18n.menu.inputJS')}}</Button>
-      <Button @click="clipStyleDialog=true">设置粘贴板格式</Button>
-    </Row>
+      </ElmElButton>
+      <ElmElButton @click="open">{{$t('i18n.menu.openXML')}}</ElmElButton>
+      <ElmElButton @click="create">{{$t('i18n.menu.newXML')}} </ElmElButton>
+      <ElmElButton @click="save">{{$t('i18n.menu.saveXML')}}</ElmElButton>
+      <ElmElButton @click="output">{{$t('i18n.menu.outputJS')}}</ElmElButton>
+      <ElmElButton @click="input">{{$t('i18n.menu.inputJS')}}</ElmElButton>
+      <ElmElButton @click="clipStyleDialog=true">设置粘贴板格式</ElmElButton>
+    </ElmElRow>
 
-    <Row style="padding: 0.5em;">
+    <ElmElRow style="padding: 0.5em;">
       <!-- 标签(语言)编辑部分 -->
       <div v-for="(tag,ind) in langTag" @click="curLang=tag.code" style="display: inline-block;float: left;padding: 0 0.2em;">
-        <Tag
+        <ElmElTag
                 :key="tag.code"
                 closable
                 :disable-transitions="false"
                 style="cursor: pointer;"
                 @close.prevent="handleClose(ind)">
           {{tag.label}}
-        </Tag>
+        </ElmElTag>
       </div>
       <div @click="curLang = ''" style="display: inline-block;float: left;padding: 0 0.2em;" v-show="curLang !== ''">
-        <Tag style="cursor: pointer;">{{$t('i18n.other.showAllLanguage')}}</Tag>
+        <ElmElTag style="cursor: pointer;">{{$t('i18n.other.showAllLanguage')}}</ElmElTag>
       </div>
 
-      <Button v-show="!addLangDialog" class="button-new-tag" size="small" @click="showInput">+ {{$t('i18n.other.newLanguage')}}</Button>
-    </Row>
-    <Tree accordion ref="tree" draggable :data="data5" show-checkbox="" node-key="id" :expand-on-click-node="false" :filter-node-method="filterNode">
+      <ElmElButton v-show="!addLangDialog" class="button-new-tag" size="small" @click="showInput">+ {{$t('i18n.other.newLanguage')}}</ElmElButton>
+    </ElmElRow>
+    <ElmElTree accordion ref="tree" draggable :data="data5" show-checkbox="" node-key="id" :expand-on-click-node="false" :filter-node-method="filterNode">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <div v-if="data.atr=='pack'">
           <span @click="() => showDesc(data)">
-            <Tag size="mini" type="success">{{ node.label }}</Tag>
+            <ElmElTag size="mini" type="success">{{ node.label }}</ElmElTag>
           </span>
           <span>
-            <Button type="text" size="mini" @click="() => append(data,node)">
+            <ElmElButton type="text" size="mini" @click="() => append(data,node)">
               {{$t('i18n.treeOperate.addNode')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => remove(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => remove(node, data)">
               {{$t('i18n.treeOperate.deleteNode')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => changePackInfo(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => changePackInfo(node, data)">
               {{$t('i18n.treeOperate.changeNode')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => copyLink(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => copyLink(node, data)">
               {{$t('i18n.treeOperate.copyLink')}}
-            </Button>
-            <Button v-show="data.type !== 'root'" type="text" size="mini" @click="() => copyNode(node, data,'pack')">
+            </ElmElButton>
+            <ElmElButton v-show="data.type !== 'root'" type="text" size="mini" @click="() => copyNode(node, data,'pack')">
               复制
-            </Button>
-            <Button v-show="(copyNodes.wait && (!data.children.length || (copyNodes.target ^ (data.children[0].atr === 'lang'))))" type="text" size="mini" @click="() => pasteNode(node, data)">
+            </ElmElButton>
+            <ElmElButton v-show="(copyNodes.wait && (!data.children.length || (copyNodes.target ^ (data.children[0].atr === 'lang'))))" type="text" size="mini" @click="() => pasteNode(node, data)">
               粘贴
-            </Button>
+            </ElmElButton>
           </span>
         </div>
         <div v-else-if="data.atr=='lang'">
-          <Tag slot="reference" size="mini" type="info">{{ node.label }}</Tag>
+          <ElmElTag slot="reference" size="mini" type="info">{{ node.label }}</ElmElTag>
           <span>
-            <Button type="text" size="mini" @click="changeLangWord(node)">
+            <ElmElButton type="text" size="mini" @click="changeLangWord(node)">
               {{$t('i18n.treeOperate.change')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => remove(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => remove(node, data)">
               {{$t('i18n.treeOperate.delete')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => copyLink(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => copyLink(node, data)">
               {{$t('i18n.treeOperate.copyLink')}}
-            </Button>
-            <Button type="text" size="mini" @click="() => copyNode(node, data)">
+            </ElmElButton>
+            <ElmElButton type="text" size="mini" @click="() => copyNode(node, data)">
               复制
-            </Button>
+            </ElmElButton>
           </span>
         </div>
       </span>
-    </Tree>
+    </ElmElTree>
     <div id="dialog">
-      <Dialog
+      <ElmElDialog
               :title="$t('i18n.newLanguageDialog.title')"
               :visible.sync="addLangDialog"
               width="30%"
               :before-close="beforeClose">
-        <From ref="form" :model="newTag" label-width="80px">
-          <FormItem :label="$t('i18n.newLanguageDialog.languageType')">
-            <Input :placeholder="$t('i18n.newLanguageDialog.languageTypePlaceholder')" v-model="newTag.label"></Input>
-          </FormItem>
-          <FormItem :label="$t('i18n.newLanguageDialog.code')">
-            <Input placeholder="CN / EN / FR" v-model="newTag.code"></Input>
-          </FormItem>
-        </From>
+        <ElmElForm ref="form" :model="newTag" label-width="80px">
+          <ElmElFormItem :label="$t('i18n.newLanguageDialog.languageType')">
+            <ElmElInput :placeholder="$t('i18n.newLanguageDialog.languageTypePlaceholder')" v-model="newTag.label"></ElmElInput>
+          </ElmElFormItem>
+          <ElmElFormItem :label="$t('i18n.newLanguageDialog.code')">
+            <ElmElInput placeholder="CN / EN / FR" v-model="newTag.code"></ElmElInput>
+          </ElmElFormItem>
+        </ElmElForm>
         <span slot="footer" class="dialog-footer">
-          <Button @click="addLangDialog = false">{{$t('i18n.other.cancel')}}</Button>
-          <Button type="primary" @click="comfirmAddLang">{{$t('i18n.other.ok')}}</Button>
+          <ElmElButton @click="addLangDialog = false">{{$t('i18n.other.cancel')}}</ElmElButton>
+          <ElmElButton type="primary" @click="comfirmAddLang">{{$t('i18n.other.ok')}}</ElmElButton>
         </span>
-      </Dialog>
-      <Dialog
+      </ElmElDialog>
+      <ElmElDialog
           :title="$t('i18n.changeLangDialog.title')"
           :visible.sync="changeLangDialog"
           width="30%"
           :before-close="beforeClose">
-        <From ref="form" :model="changeLang" label-width="80px">
-          <FormItem :label="$t('i18n.changeLangDialog.old')">
-            <Input :placeholder="$t('i18n.changeLangDialog.old')" v-model="changeLang.oldL"></Input>
-          </FormItem>
-          <FormItem :label="$t('i18n.changeLangDialog.new')">
-            <Input :placeholder="$t('i18n.changeLangDialog.new')" v-model="changeLang.newL"></Input>
-          </FormItem>
-        </From>
+        <ElmElForm ref="form" :model="changeLang" label-width="80px">
+          <ElmElFormItem :label="$t('i18n.changeLangDialog.old')">
+            <ElmElInput :placeholder="$t('i18n.changeLangDialog.old')" v-model="changeLang.oldL"></ElmElInput>
+          </ElmElFormItem>
+          <ElmElFormItem :label="$t('i18n.changeLangDialog.new')">
+            <ElmElInput :placeholder="$t('i18n.changeLangDialog.new')" v-model="changeLang.newL"></ElmElInput>
+          </ElmElFormItem>
+        </ElmElForm>
         <span slot="footer" class="dialog-footer">
-          <Button @click="changeLangDialog = false">{{$t('i18n.other.cancel')}}</Button>
-          <Button type="primary" @click="comfirmChangeLangWord">{{$t('i18n.other.ok')}}</Button>
+          <ElmElButton @click="changeLangDialog = false">{{$t('i18n.other.cancel')}}</ElmElButton>
+          <ElmElButton type="primary" @click="comfirmChangeLangWord">{{$t('i18n.other.ok')}}</ElmElButton>
         </span>
-      </Dialog>
-      <Dialog
+      </ElmElDialog>
+      <ElmElDialog
           :title="$t('i18n.addNodeDialog.title')"
           :visible.sync="addLangNodeDialog"
           width="30%"
           :before-close="beforeClose">
-        <From ref="form" :model="newNode" label-width="80px">
-          <FormItem :placeholder="$t('i18n.addNodeDialog.langPlaceholder')" :label="$t('i18n.addNodeDialog.type')">
+        <ElmElForm ref="form" :model="newNode" label-width="80px">
+          <ElmElFormItem :placeholder="$t('i18n.addNodeDialog.langPlaceholder')" :label="$t('i18n.addNodeDialog.type')">
             <Select v-model="newNode.atr" :placeholder="$t('i18n.addNodeDialog.typePlaceholder')">
               <Option
                       v-for="nt in nodeTypes"
@@ -128,8 +128,8 @@
                       :value="nt.value">
               </Option>
             </Select>
-          </FormItem>
-          <FormItem v-show="newNode.atr=='lang'" :placeholder="$t('i18n.addNodeDialog.langPlaceholder')" :label="$t('i18n.addNodeDialog.lang')">
+          </ElmElFormItem>
+          <ElmElFormItem v-show="newNode.atr=='lang'" :placeholder="$t('i18n.addNodeDialog.langPlaceholder')" :label="$t('i18n.addNodeDialog.lang')">
             <Select v-model="newNode.type" placeholder="类型语言">
               <Option
                       v-for="lt in langTag"
@@ -138,53 +138,53 @@
                       :value="lt.code">
               </Option>
             </Select>
-          </FormItem>
-          <FormItem :label="$t('i18n.addNodeDialog.name')">
-            <Input :placeholder="$t('i18n.addNodeDialog.namePlaceholder')" v-model="newNode.label"></Input>
-          </FormItem>
-          <FormItem :label="$t('i18n.addNodeDialog.desc')">
-            <Input :placeholder="$t('i18n.addNodeDialog.descPlaceholder')" v-model="newNode.desc"></Input>
-          </FormItem>
-        </From>
+          </ElmElFormItem>
+          <ElmElFormItem :label="$t('i18n.addNodeDialog.name')">
+            <ElmElInput :placeholder="$t('i18n.addNodeDialog.namePlaceholder')" v-model="newNode.label"></ElmElInput>
+          </ElmElFormItem>
+          <ElmElFormItem :label="$t('i18n.addNodeDialog.desc')">
+            <ElmElInput :placeholder="$t('i18n.addNodeDialog.descPlaceholder')" v-model="newNode.desc"></ElmElInput>
+          </ElmElFormItem>
+        </ElmElForm>
         <span slot="footer" class="dialog-footer">
-          <Button @click="addLangNodeDialog = false">{{$t('i18n.other.cancel')}}</Button>
-          <Button type="primary" @click="comfirmAddNode">{{$t('i18n.other.ok')}}</Button>
+          <ElmElButton @click="addLangNodeDialog = false">{{$t('i18n.other.cancel')}}</ElmElButton>
+          <ElmElButton type="primary" @click="comfirmAddNode">{{$t('i18n.other.ok')}}</ElmElButton>
         </span>
-      </Dialog>
-      <Dialog
+      </ElmElDialog>
+      <ElmElDialog
           :title="$t('i18n.changeNodeDialog.title')"
           :visible.sync="changePackInfoDialog"
           width="30%"
           :before-close="beforeClose">
-        <From ref="form" :model="packNodeInfo.newInfo" label-width="80px">
-          <FormItem :label="$t('i18n.changeNodeDialog.name')">
-            <Input :placeholder="$t('i18n.changeNodeDialog.name')" v-model="packNodeInfo.newInfo.label"></Input>
-          </FormItem>
-          <FormItem :label="$t('i18n.changeNodeDialog.desc')">
-            <Input :placeholder="$t('i18n.changeNodeDialog.desc')" v-model="packNodeInfo.newInfo.desc"></Input>
-          </FormItem>
-        </From>
+        <ElmElForm ref="form" :model="packNodeInfo.newInfo" label-width="80px">
+          <ElmElFormItem :label="$t('i18n.changeNodeDialog.name')">
+            <ElmElInput :placeholder="$t('i18n.changeNodeDialog.name')" v-model="packNodeInfo.newInfo.label"></ElmElInput>
+          </ElmElFormItem>
+          <ElmElFormItem :label="$t('i18n.changeNodeDialog.desc')">
+            <ElmElInput :placeholder="$t('i18n.changeNodeDialog.desc')" v-model="packNodeInfo.newInfo.desc"></ElmElInput>
+          </ElmElFormItem>
+        </ElmElForm>
         <span slot="footer" class="dialog-footer">
-          <Button @click="changePackInfoDialog = false">{{$t('i18n.other.cancel')}}</Button>
-          <Button type="primary" @click="comfirmChangePackInfo">{{$t('i18n.other.ok')}}</Button>
+          <ElmElButton @click="changePackInfoDialog = false">{{$t('i18n.other.cancel')}}</ElmElButton>
+          <ElmElButton type="primary" @click="comfirmChangePackInfo">{{$t('i18n.other.ok')}}</ElmElButton>
         </span>
-      </Dialog>
+      </ElmElDialog>
       <!-- 修改粘贴板格式 -->
-      <Dialog
+      <ElmElDialog
               :title="'修改粘贴板格式'"
               :visible.sync="clipStyleDialog"
               width="30%"
               :before-close="beforeClose">
-        <From ref="form" :model="newTag" label-width="80px">
-          <FormItem :label="$t('i18n.newLanguageDialog.code')">
-            <Input placeholder="一定要带 #! 作为替换部分" v-model="clipStyle"></Input>
-          </FormItem>
-        </From>
+        <ElmElForm ref="form" :model="newTag" label-width="80px">
+          <ElmElFormItem :label="$t('i18n.newLanguageDialog.code')">
+            <ElmElInput placeholder="一定要带 #! 作为替换部分" v-model="clipStyle"></ElmElInput>
+          </ElmElFormItem>
+        </ElmElForm>
         <span slot="footer" class="dialog-footer">
-          <Button @click="clipStyleDialog = false">{{$t('i18n.other.cancel')}}</Button>
-          <Button type="primary" @click="clipStyleDialog = false">{{$t('i18n.other.ok')}}</Button>
+          <ElmElButton @click="clipStyleDialog = false">{{$t('i18n.other.cancel')}}</ElmElButton>
+          <ElmElButton type="primary" @click="clipStyleDialog = false">{{$t('i18n.other.ok')}}</ElmElButton>
         </span>
-      </Dialog>
+      </ElmElDialog>
     </div>
   </div>
 </template>
@@ -193,7 +193,6 @@
     /* eslint-disable no-eval */
 
     import 'element-ui/lib/theme-chalk/index.css'
-    import { Row, Tree, Tag, Button, Dialog, Form, FormItem, Input } from 'element-ui'
 
     // 解析 XML 中的 i18n 节点
     function resolve(node, json, pCounter) {
@@ -390,16 +389,6 @@
     }
 
     export default {
-      components: {
-          Row,
-          Tag,
-          Tree,
-          Button,
-          Dialog,
-          Form,
-          FormItem,
-          Input
-      },
       data() {
         return {
           // 过滤显示的语言节点

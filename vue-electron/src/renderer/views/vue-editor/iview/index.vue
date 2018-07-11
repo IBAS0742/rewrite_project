@@ -6,12 +6,13 @@
             </div>
             <div :style="bottomViewStyle">
                 <div ref="dragBar" class="dragBar"></div>
-                <Tabs v-model="activeName" tab-position="left">
-                    <TabPane label="代码" name="second">配置管理</TabPane>
-                    <TabPane label="节点树" name="first">用户管理</TabPane>
-                    <TabPane label="样式" name="third">角色管理</TabPane>
-                    <TabPane label="配置" name="fourth">定时任务补偿</TabPane>
-                </Tabs>
+                <iv-button>按钮</iv-button>
+                <iv-tabs v-model="activeName" tab-position="left">
+                    <iv-tab-pane label="代码" name="second">配置管理</iv-tab-pane>
+                    <iv-tab-pane label="节点树" name="first">用户管理</iv-tab-pane>
+                    <iv-tab-pane label="样式" name="third">角色管理</iv-tab-pane>
+                    <iv-tab-pane label="配置" name="fourth">定时任务补偿</iv-tab-pane>
+                </iv-tabs>
             </div>
         </div>
     </div>
@@ -19,14 +20,12 @@
 
 <script>
     import preview from './preview'
-    import * as element from 'iview'
     import 'iview/dist/styles/iview.css'
 
     export default {
         name: 'vue-editor',
         components: {
-            preview,
-            ...element
+            preview
         },
         data() {
             return {
@@ -48,7 +47,7 @@
                 activeName: 'first',
                 code: [
                     {
-                        name: 'Button',
+                        name: 'IvButton',
                         id: 'first',
                         props: {},
                         style: {},
@@ -56,11 +55,11 @@
                         children: []
                     },
                     {
-                        name: 'Tag',
+                        name: 'IvTag',
                         id: 'second',
                         children: [
                             {
-                                name: 'Input',
+                                name: 'IvInput',
                                 props: {
                                     value: '内容'
                                 },

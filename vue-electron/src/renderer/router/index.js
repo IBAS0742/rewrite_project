@@ -37,13 +37,21 @@ export const constantRouterMap = [
   {
     path: '/i18n',
     component: Layout,
+    redirect: '/i18n/index',
+    meta: { title: 'i18n', icon: 'form' },
     children: [
-      {
-        path: 'index',
-        name: 'i18n',
-        component: () => import('@/views/i18n/index'),
-        meta: { title: 'i18n', icon: 'form' }
-      }
+        {
+            path: 'index',
+            name: 'i18n',
+            component: () => import('@/views/i18n/index'),
+            meta: { title: 'i18n', icon: 'form' }
+        },
+        {
+            path: 'index1',
+            name: 'i18n1',
+            component: () => import('@/views/i18n/index'),
+            meta: { title: 'i18n1', icon: 'form' }
+        }
     ]
   },
   {
@@ -59,40 +67,33 @@ export const constantRouterMap = [
         component: () => import('@/views/vue-editor/list-iview')
       },
       {
-        path: 'make',
-        meta: { title: 'make', icon: 'form' },
-        component: () => import('@/views/vue-editor/index'),
-        children: [
-          {
-            path: 'element',
-            name: 'vue-editor-element',
-            component: () => import('@/views/vue-editor/element/index'),
-            meta: { title: 'element', icon: 'form' }
-          },
-          {
-            path: 'iview',
-            name: 'vue-editor-iview',
-            component: () => import('@/views/vue-editor/iview/index'),
-            meta: {
-              title: 'iview',
-              icon: 'form'
-            }
-          },
-          {
-            path: 'ydui',
-            name: 'vue-editor-ydui',
-            component: () => import('@/views/vue-editor/ydui/index'),
-            meta: {
-              title: 'ydui',
-              icon: 'form',
-              meta: {
-                viewport: 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0',
-                'apple-mobile-web-app-capable': 'yes',
-                'apple-mobile-web-app-status-bar-style': 'black'
-              }
-            }
+        path: 'element',
+        name: 'vue-editor-element',
+        component: () => import('@/views/vue-editor/element/index'),
+        meta: { title: 'element', icon: 'form' }
+      },
+      {
+        path: 'iview',
+        name: 'vue-editor-iview',
+        component: () => import('@/views/vue-editor/iview/index'),
+        meta: {
+          title: 'iview',
+          icon: 'form'
+        }
+      },
+      {
+        path: 'ydui',
+        name: 'vue-editor-ydui',
+        component: () => import('@/views/vue-editor/ydui/index'),
+        meta: {
+          title: 'ydui',
+          icon: 'form',
+          meta: {
+            viewport: 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0',
+            'apple-mobile-web-app-capable': 'yes',
+            'apple-mobile-web-app-status-bar-style': 'black'
           }
-        ]
+        }
       }
     ]
   },

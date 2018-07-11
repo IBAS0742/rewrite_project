@@ -1,21 +1,21 @@
 <template>
-  <Breadcrumb class="app-breadcrumb" separator="/">
+  <ElmElBreadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <BreadcrumbItem v-for="(item,index)  in levelList" :key="item.path" v-if="item.meta.title">
+      <ElmElBreadcrumbItem v-for="(item,index)  in levelList" :key="item.path" v-if="item.meta.title">
         <span v-if="item.redirect==='noredirect'||index==levelList.length-1" class="no-redirect">{{item.meta.title}}</span>
         <router-link v-else :to="item.redirect||item.path">{{item.meta.title}}</router-link>
-      </BreadcrumbItem>
+      </ElmElBreadcrumbItem>
     </transition-group>
-  </Breadcrumb>
+  </ElmElBreadcrumb>
 </template>
 
 <script>
   import 'element-ui/lib/theme-chalk/index.css'
-  import { Breadcrumb, BreadcrumbItem } from 'element-ui'
+  // import { Breadcrumb, BreadcrumbItem } from 'element-ui'
 export default {
-  components: {
-      Breadcrumb, BreadcrumbItem
-  },
+  // components: {
+  //     Breadcrumb, BreadcrumbItem
+  // },
   created() {
     this.getBreadcrumb()
   },

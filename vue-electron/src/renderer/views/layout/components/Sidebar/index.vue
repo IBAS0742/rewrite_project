@@ -1,6 +1,6 @@
 <template>
   <ScrollBar>
-    <Menu
+    <ElmElMenu
       mode="vertical"
       :show-timeout="200"
       :default-active="$route.path"
@@ -10,7 +10,7 @@
       active-text-color="#409EFF"
     >
       <SidebarItem :routes="routes"></SidebarItem>
-    </Menu>
+    </ElmElMenu>
   </ScrollBar>
 </template>
 
@@ -19,10 +19,9 @@ import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 import ScrollBar from '@/components/ScrollBar'
 import 'element-ui/lib/theme-chalk/index.css'
-import { Menu } from 'element-ui'
 
 export default {
-  components: { SidebarItem, ScrollBar, Menu },
+  components: { SidebarItem, ScrollBar },
   computed: {
     ...mapGetters([
       'sidebar'

@@ -1,20 +1,20 @@
 <template>
-  <Menu class="navbar" mode="horizontal">
+  <ElmElMenu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <Dropdown style="float: right;right: 80px;" trigger="click">
+    <ElmElDropdown style="float: right;right: 80px;" trigger="click">
       <span class="el-dropdown-link">
         国际化【{{curLanguage}}】
       </span>
-      <DropdownMenu slot="dropdown">
-        <DropdownItem>
+      <ElmElDropdownMenu slot="dropdown">
+        <ElmElDropdownItem>
           <span @click="changeLang('CN')">中文</span>
-        </DropdownItem>
-        <DropdownItem>
+        </ElmElDropdownItem>
+        <ElmElDropdownItem>
           <span @click="changeLang('EN')">English</span>
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
+        </ElmElDropdownItem>
+      </ElmElDropdownMenu>
+    </ElmElDropdown>
     <!--<el-dropdown class="avatar-container" trigger="click">-->
       <!--<div class="avatar-wrapper">-->
         <!--<img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">-->
@@ -31,7 +31,7 @@
         <!--</el-dropdown-item>-->
       <!--</el-dropdown-menu>-->
     <!--</el-dropdown>-->
-  </Menu>
+  </ElmElMenu>
 </template>
 
 <script>
@@ -39,13 +39,11 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import 'element-ui/lib/theme-chalk/index.css'
-import { Menu, Dropdown, DropdownItem, DropdownMenu } from 'element-ui'
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger,
-    Menu, Dropdown, DropdownItem, DropdownMenu
+    Hamburger
   },
   computed: {
     ...mapGetters([
