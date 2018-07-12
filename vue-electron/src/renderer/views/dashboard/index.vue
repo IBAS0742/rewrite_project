@@ -6,6 +6,7 @@
               active-color="#13ce66"
               inactive-color="#999999">
       </ElmElSwitch>自动关闭消息
+      <iv-button @click="test">试一下</iv-button>
     </div>
     <ElmElRow :gutter="10">
       <ElmElCol v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">
@@ -89,6 +90,10 @@ export default {
                 '7.可以导入本工程的 /src/renderer/i18n 中的 i18n.xml 文件进行测试，但是导出的 CN.js 和 EN.js 记得处理。',
                 '8.导入脚本时，脚本结构请参照导出脚本结构，文件必须有 [export const] 结构，且不能多或少空格，理解我能力有限'
               ].join('</div><div style="display: inline-block;width:100%">') + '</div>'
+        }, {
+          title: '模板',
+          route: '/vue-editor/list',
+          function: []
         }
       ],
       dialogTableVisible: false,
@@ -97,7 +102,7 @@ export default {
   },
   methods: {
     showDesc(fun) {
-      this.$notify({
+      this.elm.$notify({
         title: '说明 (' + (this.autoCloseMessage ? '五秒后自动关闭)' : '必须手动关闭)'),
         message: fun.desc || '作者很懒，这里没有给予说明',
         duration: (this.autoCloseMessage ? 5000 : 0)
@@ -106,6 +111,12 @@ export default {
     showDetail(card) {
       this.dialogTableVisible = true
       this.dialogContent = card
+    },
+    test() {
+        this.elm.$notify({
+            title: '标题',
+            message: '消息内容'
+        })
     }
   },
   computed: {

@@ -472,18 +472,18 @@
         },
         // 删除语言类型
         handleClose(ind) {
-          this.$confirm(this.$t('i18n.deleteNote.deleteNodeNotic'), this.$t('i18n.other.tip'), {
+          this.elm.$confirm(this.$t('i18n.deleteNote.deleteNodeNotic'), this.$t('i18n.other.tip'), {
             confirmButtonText: this.$t('i18n.other.ok'),
             cancelButtonText: this.$t('i18n.other.cancel'),
             type: 'warning'
           }).then(() => {
             this.langTag.splice(ind, 1)
-            this.$message({
+            this.elm.$message({
               type: 'success',
               message: this.$t('i18n.other.deleteSuccess')
             })
           }).catch(() => {
-            this.$message({
+            this.elm.$message({
               type: 'info',
               message: this.$t('i18n.other.cancelOP')
             })
@@ -529,7 +529,7 @@
         create() {
           this.autoSaveXML.autoSave = false
           this.autoSaveXML.filePath = ''
-          this.$confirm(this.$t('i18n.other.createXMLTip'), this.$t('i18n.other.tip'), {
+          this.elm.$confirm(this.$t('i18n.other.createXMLTip'), this.$t('i18n.other.tip'), {
             confirmButtonText: this.$t('i18n.other.ok'),
             cancelButtonText: this.$t('i18n.other.cancel'),
             type: 'warning'
@@ -544,7 +544,7 @@
             }]
             this.save()
           }).catch(() => {
-            this.$message({
+            this.elm.$message({
               type: 'info',
               message: this.$t('i18n.other.cancelOP')
             })
@@ -592,7 +592,7 @@
             ]
           })
           if (ret.length === 1) {
-            this.$prompt(this.$t('i18n.other.inputJSFileTip'), this.$t('i18n.other.tip'), {
+            this.elm.$prompt(this.$t('i18n.other.inputJSFileTip'), this.$t('i18n.other.tip'), {
               confirmButtonText: this.$t('i18n.other.ok'),
               cancelButtonText: this.$t('i18n.other.cancel')
             }).then(({ value }) => {
@@ -607,7 +607,7 @@
               }
               this.$store.state.ipc.send('fileOP', { op: 'read', path: ret[0] })
             }).catch(() => {
-              this.$message({
+              this.elm.$message({
                 type: 'info',
                 message: this.$t('i18n.other.cancelOP')
               })
@@ -666,13 +666,13 @@
         // 删除一个树节点
         remove(node, data) {
           if (data.type === 'root') {
-            this.$message({
+            this.elm.$message({
               type: 'error',
               message: this.$t('i18n.other.deleteRootError')
             })
             return
           }
-          this.$confirm(this.$t('i18n.deleteNote.deleteNodeNotic'), this.$t('i18n.other.tip'), {
+          this.elm.$confirm(this.$t('i18n.deleteNote.deleteNodeNotic'), this.$t('i18n.other.tip'), {
             confirmButtonText: this.$t('i18n.other.ok'),
             cancelButtonText: this.$t('i18n.other.cancel'),
             type: 'warning'
@@ -682,7 +682,7 @@
             const index = children.findIndex(d => d.id === data.id)
             children.splice(index, 1)
           }).catch(() => {
-            this.$message({
+            this.elm.$message({
               type: 'info',
               message: this.$t('i18n.other.cancelOP')
             })
@@ -701,7 +701,7 @@
           ret = ret.substring(ret.indexOf('{'), ret.length)
           eval('window.tmp = ' + ret)
           if (this.data5.length && this.data5[0].children && this.data5[0].children.length) {
-            this.$confirm(this.$t('i18n.other.inputJSFileWhenTreeExist'), this.$t('i18n.other.tip'), {
+            this.elm.$confirm(this.$t('i18n.other.inputJSFileWhenTreeExist'), this.$t('i18n.other.tip'), {
               confirmButtonText: this.$t('i18n.other.ok'),
               cancelButtonText: this.$t('i18n.other.cancel'),
               type: 'warning'
@@ -768,7 +768,7 @@
               if (!this.newNode.temp.data.children.every(child => {
                 return !(child.type === newNode.type)
               })) {
-                this.$confirm((this.$t('i18n.other.langExisted').replace('#word#', newNode.label)), this.$t('i18n.other.tip'), {
+                this.elm.$confirm((this.$t('i18n.other.langExisted').replace('#word#', newNode.label)), this.$t('i18n.other.tip'), {
                   confirmButtonText: this.$t('i18n.other.ok'),
                   cancelButtonText: this.$t('i18n.other.cancel'),
                   type: 'warning'
@@ -797,7 +797,7 @@
         },
         // 显示节点的备注信息
         showDesc(data) {
-          this.$notify({
+          this.elm.$notify({
             title: this.$t('i18n.other.tip'),
             message: data.desc,
             duration: 1000 * 3
@@ -826,7 +826,7 @@
                 path: this.autoSaveXML.filePath,
                 content: buildXML(this.langTag, this.data5).innerHTML
               })
-              this.$notify({
+              this.elm.$notify({
                 type: 'success',
                 message: this.$t('i18n.other.autoSaveNotice')
               })
@@ -877,14 +877,14 @@
           this.$refs.tree.filter(val)
         },
         'autoSaveXML.autoSave'(val) {
-          this.$notify({
+          this.elm.$notify({
             type: 'info',
             dangerouslyUseHTMLString: true,
             message: (val ? this.$t('i18n.other.autoSaveTipPre') + '&nbsp;<span style="color: #67c23a;">' + this.$t('i18n.other.autoSaveOpen') + '</span>' : this.$t('i18n.other.autoSaveTipPre') + '&nbsp;<span style="color: #f00;">' + this.$t('i18n.other.autoSaveClose') + '</span>')
           })
           if (val) {
             setTimeout(() => {
-              this.$notify({
+              this.elm.$notify({
                 type: 'info',
                 message: this.$t('i18n.other.autoSaveOpenMessage')
               })

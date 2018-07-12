@@ -17,3 +17,22 @@ export const renameUIComponent = (element, name, Vue) => {
         }
     }
 }
+
+import { Loading, MessageBox, Notification, Message } from 'element-ui'
+export const installElmAction = (Vue) => {
+    Vue.prototype.elm = {
+        $loading: Loading.service,
+        $msgbox: MessageBox,
+        $alert: MessageBox.alert,
+        $confirm: MessageBox.confirm,
+        $notify: Notification,
+        $message: Message
+    }
+}
+
+export const installIviewAction = (IviewMessage, IviewNotice, Vue) => {
+    Vue.prototype.iview = {
+        $Message: IviewMessage,
+        $Notice: IviewNotice
+    }
+}

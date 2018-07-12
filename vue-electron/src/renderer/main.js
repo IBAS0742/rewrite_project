@@ -36,13 +36,16 @@ Vue.component('preComponentYdui', preComponentYdui)
 // })
 
 // 引入重命名方法
-import { renameUIComponent, renameUIUse } from "./utils/renameUI"
+import { renameUIComponent, renameUIUse, installElmAction, installIviewAction } from "./utils/renameUI"
 // 引入 饿了么 框架
 import * as element from 'element-ui'
 renameUIUse(element, 'Elm', Vue)
+installElmAction(Vue)
 // 引入 iview 框架
 import * as iview from 'iview'
 renameUIComponent(iview, 'Iv', Vue)
+installIviewAction(iview.Message, iview.Notice, Vue)
+// 引入 Ydui 框架
 import { installYdui } from "./template/ydui/importAll"
 installYdui(Vue)
 
