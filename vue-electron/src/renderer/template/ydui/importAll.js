@@ -99,6 +99,9 @@ const ydui = {
 }
 
 export const installYdui = (Vue) => {
+    Vue.temp = {
+        ydui
+    }
     for (const i in ydui) {
         Vue.component('Yd' + i, ydui[i])
     }

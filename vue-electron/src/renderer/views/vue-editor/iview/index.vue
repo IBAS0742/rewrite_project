@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import preview from './preview'
+    import preview from './../preview'
     import 'iview/dist/styles/iview.css'
 
     export default {

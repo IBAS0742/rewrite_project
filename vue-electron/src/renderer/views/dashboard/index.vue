@@ -6,7 +6,6 @@
               active-color="#13ce66"
               inactive-color="#999999">
       </ElmElSwitch>自动关闭消息
-      <iv-button @click="test">试一下</iv-button>
     </div>
     <ElmElRow :gutter="10">
       <ElmElCol v-for="(card,ind) in cards" :key="ind" :xs="24" :sm="12" :md="12" :lg="12" :xl="8">

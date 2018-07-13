@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import preview from './preview'
+    import preview from './../preview'
     import 'element-ui/lib/theme-chalk/index.css'
     import * as element from 'element-ui'
 

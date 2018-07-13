@@ -22,12 +22,8 @@ const i18n = new VueI18n({
   messages: i18nConfig.i18n // set locale messages
 })
 
-import preComponentElement from './components/component/preComponentElement'
-Vue.component('preComponentElement', preComponentElement)
-import preComponentIView from './components/component/preComponentIView'
-Vue.component('preComponentIView', preComponentIView)
-import preComponentYdui from './components/component/preComponentYdui'
-Vue.component('preComponentYdui', preComponentYdui)
+import preComponent from './components/component/preComponent'
+Vue.component('preComponent', preComponent)
 // Vue.use(ElementUI, {
 //   i18n: (key, value) => {
 //     console.log(key, value)
