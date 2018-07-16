@@ -32,12 +32,10 @@ export const ydCitySelect = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-city-select 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'citySelect-' + (new Date()).getTime()
             return {
                 // #normal#id: 'citySelect-' + (new Date()).getTime(),

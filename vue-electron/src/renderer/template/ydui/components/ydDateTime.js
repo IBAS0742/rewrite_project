@@ -42,12 +42,10 @@ export const ydDateTime = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-date-time 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'dateTime-' + (new Date()).getTime()
             return {
                 id: 'dateTime-' + (new Date()).getTime(),

@@ -25,12 +25,10 @@ export const ydStep = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-step 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'step-' + (new Date()).getTime()
             return {
                 id: 'step-' + (new Date()).getTime(),
@@ -87,12 +85,10 @@ export const ydStepItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-step-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'stepItem-' + (new Date()).getTime()
             return {
                 // #normal#id: 'stepItem-' + (new Date()).getTime(),

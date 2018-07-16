@@ -26,12 +26,10 @@ export const ydCheckList = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-check-list 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'checkList-' + (new Date()).getTime()
             return {
                 id: 'checkList-' + (new Date()).getTime(),
@@ -78,12 +76,10 @@ export const ydCheckListItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-check-list-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'checkListItem-' + (new Date()).getTime()
             return {
                 id: 'checkListItem-' + (new Date()).getTime(),

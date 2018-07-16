@@ -27,12 +27,10 @@ export const ydTab = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-tab 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'tab-' + (new Date()).getTime()
             return {
                 id: 'tab-' + (new Date()).getTime(),
@@ -80,12 +78,10 @@ export const ydTabPanel = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-tab-panel 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'tabPanel-' + (new Date()).getTime()
             return {
                 id: 'tabPanel-' + (new Date()).getTime(),

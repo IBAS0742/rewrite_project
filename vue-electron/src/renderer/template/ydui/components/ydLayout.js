@@ -51,12 +51,10 @@ export const ydLayout = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-layout 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'layout-' + (new Date()).getTime()
             return {
                 // #normal#id: 'layout-' + (new Date()).getTime(),

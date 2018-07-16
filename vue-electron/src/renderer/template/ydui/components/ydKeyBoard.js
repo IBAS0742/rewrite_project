@@ -29,12 +29,10 @@ export const ydKeyBoard = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-key-board 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'keyBoard-' + (new Date()).getTime()
             return {
                 id: 'keyBoard-' + (new Date()).getTime(),

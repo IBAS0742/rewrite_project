@@ -27,12 +27,10 @@ export const ydRollNotice = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-roll-notice 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'rollNotice-' + (new Date()).getTime()
             return {
                 id: 'rollNotice-' + (new Date()).getTime(),
@@ -78,12 +76,10 @@ export const ydRollNoticeItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-roll-notice-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'rollNoticeItem-' + (new Date()).getTime()
             return {
                 // #normal#id: 'rollNoticeItem-' + (new Date()).getTime(),

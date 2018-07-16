@@ -46,12 +46,10 @@ export const ydInfiniteScroll = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-infinite-scroll 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'infiniteScroll-' + (new Date()).getTime()
             return {
                 // #normal#id: 'infiniteScroll-' + (new Date()).getTime(),

@@ -25,12 +25,10 @@ export const ydGridsGroup = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-grids-group 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'gridsGroup-' + (new Date()).getTime()
             return {
                 id: 'gridsGroup-' + (new Date()).getTime(),
@@ -93,12 +91,10 @@ export const ydGridsItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-grids-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'gridsItem-' + (new Date()).getTime()
             return {
                 // #normal#id: 'gridsItem-' + (new Date()).getTime(),

@@ -24,12 +24,10 @@ export const ydLightBox = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-light-box 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'lightBox-' + (new Date()).getTime()
             return {
                 id: 'lightBox-' + (new Date()).getTime(),
@@ -76,12 +74,10 @@ export const ydLightBoxImg = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-light-box-img 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'lightBoxImg-' + (new Date()).getTime()
             return {
                 id: 'lightBoxImg-' + (new Date()).getTime(),
@@ -143,12 +139,10 @@ export const ydLightBoxTxt = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-light-box-txt 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'lightBoxTxt-' + (new Date()).getTime()
             return {
                 // #normal#id: 'lightBoxTxt-' + (new Date()).getTime(),

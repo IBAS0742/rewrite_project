@@ -29,12 +29,10 @@ export const ydProgressBar = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-progress-bar 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'progressBar-' + (new Date()).getTime()
             return {
                 id: 'progressBar-' + (new Date()).getTime(),

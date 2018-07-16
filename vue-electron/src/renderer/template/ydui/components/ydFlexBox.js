@@ -23,12 +23,10 @@ export const ydFlexBox = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-flex-box 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'flexBox-' + (new Date()).getTime()
             return {
                 id: 'flexBox-' + (new Date()).getTime(),
@@ -74,12 +72,10 @@ export const ydFlexBoxItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-flex-box-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'flexBoxItem-' + (new Date()).getTime()
             return {
                 id: 'flexBoxItem-' + (new Date()).getTime(),

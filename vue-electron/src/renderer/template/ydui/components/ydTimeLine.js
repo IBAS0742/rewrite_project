@@ -23,12 +23,10 @@ export const ydTimeLine = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-time-line 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'timeLine-' + (new Date()).getTime()
             return {
                 id: 'timeLine-' + (new Date()).getTime(),
@@ -85,12 +83,10 @@ export const ydTimeLineItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-time-line-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'timeLineItem-' + (new Date()).getTime()
             return {
                 // #normal#id: 'timeLineItem-' + (new Date()).getTime(),

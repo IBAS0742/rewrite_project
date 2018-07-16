@@ -25,12 +25,10 @@ export const ydIcons = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-icons 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             return {
                 id: 'icons-' + (new Date()).getTime(),
                 title: '图标',

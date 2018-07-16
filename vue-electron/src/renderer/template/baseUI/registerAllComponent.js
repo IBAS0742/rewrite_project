@@ -614,7 +614,9 @@ export const baseComponent = ((baseUI) => {
                     name: this.name,
                     realname: this.name,
                     style: {},
-                    type: 'el'
+                    type: 'el',
+                    title: this.name,
+                    children: []
                 }, ui)
             }
         }

@@ -1,5 +1,7 @@
 import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 
+// todo 如何将属性进行绑定
+
 // YDUI-Name 组件名称
 // YDUI-name 组件名称 小写
 // YDUI-tiny-name 组件名称缩写
@@ -9,7 +11,8 @@ export const ydActionSheet = (function () {
     const props = Object.assign({}, Vue.temp.ydui.ActionSheet.props, {
 		"items": buildYduiProps(null, null, "array", "菜单项数组：                [{                label: string, //菜单项的文本                callback: function, //点击该菜单项的回调函数                stay: boolean, //是否关闭 actionsheet（默认false，直接关闭）            }]"),
 		"cancel": buildYduiProps(null, null, "string", "取消按钮的文本，为空则不显示取消按钮"),
-		"masker-opacity（v1.2.1新增）": buildYduiProps(null, ".5", "number", "遮罩层透明度")
+		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度"),
+        'v-model': buildYduiProps(null, false, "boolean", "显示菜单"),
     })
     return {
         // 这个是在 dom 树中显示可以用的
@@ -25,12 +28,10 @@ export const ydActionSheet = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-action-sheet 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'actionSheet-' + (new Date()).getTime()
             return {
                 // #normal#id: 'actionSheet-' + (new Date()).getTime(),

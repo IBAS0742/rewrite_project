@@ -29,12 +29,10 @@ export const ydSlider = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-slider 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'slider-' + (new Date()).getTime()
             return {
                 id: 'slider-' + (new Date()).getTime(),
@@ -80,12 +78,10 @@ export const ydSliderItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-slider-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'sliderItem-' + (new Date()).getTime()
             return {
                 id: 'sliderItem-' + (new Date()).getTime(),

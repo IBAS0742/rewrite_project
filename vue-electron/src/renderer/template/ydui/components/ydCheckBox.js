@@ -30,12 +30,10 @@ export const ydCheckBox = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-check-box 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'checkBox-' + (new Date()).getTime()
             return {
                 // #normal#id: 'checkBox-' + (new Date()).getTime(),
@@ -82,12 +80,10 @@ export const ydCheckBoxGroup = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-check-box-group 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'checkBoxGroup-' + (new Date()).getTime()
             return {
                 id: 'checkBoxGroup-' + (new Date()).getTime(),

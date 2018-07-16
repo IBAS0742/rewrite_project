@@ -23,12 +23,10 @@ export const ydListTheme = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-list 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'list-' + (new Date()).getTime()
             return {
                 id: 'list-' + (new Date()).getTime(),
@@ -91,12 +89,10 @@ export const ydListItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-list-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'list-item-' + (new Date()).getTime()
             return {
                 // #normal#id: 'list-item-' + (new Date()).getTime(),
@@ -141,12 +137,10 @@ export const ydListOther = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-list-other 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'list-o-' + (new Date()).getTime()
             return {
                 id: 'list-o-' + (new Date()).getTime(),

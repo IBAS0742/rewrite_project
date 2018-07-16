@@ -23,12 +23,10 @@ export const ydPreview = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-preview 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'preview-' + (new Date()).getTime()
             return {
                 id: 'preview-' + (new Date()).getTime(),
@@ -85,12 +83,10 @@ export const ydPreviewHeader = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-preview-header 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'previewHeader-' + (new Date()).getTime()
             return {
                 // #normal#id: 'previewHeader-' + (new Date()).getTime(),
@@ -147,12 +143,10 @@ export const ydPreviewItem = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-preview-item 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'previewItem-' + (new Date()).getTime()
             return {
                 // #normal#id: 'previewItem-' + (new Date()).getTime(),

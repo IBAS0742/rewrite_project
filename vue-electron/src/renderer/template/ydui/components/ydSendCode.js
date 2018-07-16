@@ -27,12 +27,10 @@ export const ydSendCode = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-send-code 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'sendCode-' + (new Date()).getTime()
             return {
                 id: 'sendCode-' + (new Date()).getTime(),
