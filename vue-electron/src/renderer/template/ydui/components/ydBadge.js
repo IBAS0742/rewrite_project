@@ -1,18 +1,22 @@
+import { buildYduiProps } from "../buildDefaultObject";
 
 // YDUI-Name 组件名称
 // YDUI-name 组件名称 小写
 // YDUI-tiny-name 组件名称缩写
 // YDUI-chi-name 组件中文标签
 
-export const yd#YDUI-Name# = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.#YDUI-Name#.props, {
-        // #props#
+export const ydBadge = (function () {
+    const props = Object.assign({}, Vue.temp.ydui.Badge.props, {
+		"type": buildYduiProps([ "primary", " danger", " warning", " hollow" ], "", "string", "角标类型[默认为灰底白字]"),
+		"shape": buildYduiProps([ "circle", " square" ], "circle", "string", "角标形状（圆形和方形）"),
+		"color": buildYduiProps(null, null, "string && 常规颜色值", "角标颜色"),
+		"bgcolor": buildYduiProps(null, null, "string && 常规颜色值", "角标背景色")
     })
     return {
         // 这个是在 dom 树中显示可以用的
-        name: 'yd#YDUI-Name#',
+        name: 'ydBadge',
         // 这个是方便阅读定义的
-        label: '#YDUI-chi-name#',
+        label: '角标',
         // 这里从 ydui 中获取 props 的定义
         props,
         // #slot#slots: #slotstr#,
@@ -25,23 +29,23 @@ export const yd#YDUI-Name# = (function () {
             console.log(props)
             return p
         })(props),
-        // 生成一个基础的 yd-#YDUI-name# 对象的节点
+        // 生成一个基础的 yd-badge 对象的节点
         createElementNode() {
             console.log(this.baseProps)
-            // #slot#let id = '#YDUI-tiny-name#-' + (new Date()).getTime()
+            // #slot#let id = 'badge-' + (new Date()).getTime()
             return {
-                // #normal#id: '#YDUI-tiny-name#-' + (new Date()).getTime(),
+                id: 'badge-' + (new Date()).getTime(),
                 // #slot#id,
-                title: '#YDUI-chi-name#',
+                title: '角标',
                 // 对应当前框架中的名称
-                name: 'yd-#YDUI-name#',
+                name: 'yd-badge',
                 // 官方文档中的名称
-                realname: 'yd-#YDUI-name#',
+                realname: 'yd-badge',
                 props: this.baseProps,
                 // 默认内容
-                // #normal#text: '#YDUI-name#',
+                text: 'badge',
                 type: 'el',
-                // #normal#children: [],
+                children: [],
                 // #slot#children: buildYduiSlot(this.slots, id),
                 style: {}
             }

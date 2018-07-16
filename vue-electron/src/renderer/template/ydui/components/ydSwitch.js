@@ -1,18 +1,22 @@
+import { buildYduiProps } from "../buildDefaultObject";
 
 // YDUI-Name 组件名称
 // YDUI-name 组件名称 小写
 // YDUI-tiny-name 组件名称缩写
 // YDUI-chi-name 组件中文标签
 
-export const yd#YDUI-Name# = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.#YDUI-Name#.props, {
-        // #props#
+export const ydSwitch = (function () {
+    const props = Object.assign({}, Vue.temp.ydui.Switch.props, {
+		"disabled": buildYduiProps(null, "false", "boolean", "是否禁用"),
+		"color": buildYduiProps(null, "#4cd864", "string && 常规颜色值", "颜色"),
+		"true-value": buildYduiProps(null, "true", "string, number, boolean", "选中时的值"),
+		"false-value": buildYduiProps(null, "false", "string, number, boolean", "选中时的值")
     })
     return {
         // 这个是在 dom 树中显示可以用的
-        name: 'yd#YDUI-Name#',
+        name: 'ydSwitch',
         // 这个是方便阅读定义的
-        label: '#YDUI-chi-name#',
+        label: '开关',
         // 这里从 ydui 中获取 props 的定义
         props,
         // #slot#slots: #slotstr#,
@@ -25,23 +29,23 @@ export const yd#YDUI-Name# = (function () {
             console.log(props)
             return p
         })(props),
-        // 生成一个基础的 yd-#YDUI-name# 对象的节点
+        // 生成一个基础的 yd-switch 对象的节点
         createElementNode() {
             console.log(this.baseProps)
-            // #slot#let id = '#YDUI-tiny-name#-' + (new Date()).getTime()
+            // #slot#let id = 'switch-' + (new Date()).getTime()
             return {
-                // #normal#id: '#YDUI-tiny-name#-' + (new Date()).getTime(),
+                id: 'switch-' + (new Date()).getTime(),
                 // #slot#id,
-                title: '#YDUI-chi-name#',
+                title: '开关',
                 // 对应当前框架中的名称
-                name: 'yd-#YDUI-name#',
+                name: 'yd-switch',
                 // 官方文档中的名称
-                realname: 'yd-#YDUI-name#',
+                realname: 'yd-switch',
                 props: this.baseProps,
                 // 默认内容
-                // #normal#text: '#YDUI-name#',
+                text: 'switch',
                 type: 'el',
-                // #normal#children: [],
+                children: [],
                 // #slot#children: buildYduiSlot(this.slots, id),
                 style: {}
             }
