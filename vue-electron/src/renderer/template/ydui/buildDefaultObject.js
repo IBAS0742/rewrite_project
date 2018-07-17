@@ -14,6 +14,9 @@ const propsType = {
             } else {
                 return false
             }
+        },
+        range() {
+            return [true, false]
         }
     },
     "string":{
@@ -162,6 +165,9 @@ const propsType = {
 export const buildYduiProps = (range, defaultV, type, desc) => {
     type = type || 'string'
     defaultV = propsType[type].cb(defaultV)
+    if (type === 'boolean') {
+        range = [true, false]
+    }
     return {
         type,
         range,
@@ -177,6 +183,7 @@ export const buildYduiSlot = (slots, id) => {
             id: id + slots[i].slot,
             type: 'slot',
             title: slots[i].desc || slots[i].slot,
+            naturalTitle: slots[i].desc || slots[i].slot
         }))
     }
     return s
@@ -188,7 +195,8 @@ export const recoverYduiSlot = (node) => {
         have: false,
         id: node.id,
         slot: node.slot,
-        title: node.title || node.slot,
-        type: node.type
+        title: node.naturalTitle || node.slot,
+        type: node.type,
+        naturalTitle: node.naturalTitle
     }
 }

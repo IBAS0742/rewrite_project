@@ -2,7 +2,7 @@
     <div class="main">
         <elm-el-slider v-model="offsetLeft"></elm-el-slider>
         <div class="left-panel" ref="mainDiv" :style="'width:' + offsetLeft + '%;display:' + (offsetLeft? 'block':'none')">
-            <yd-tab style="width:100%;" v-model="activeName" tab-position="left">
+            <yd-tab style="width:100%;height: 100%;overflow-y: scroll;" v-model="activeName" tab-position="left">
                 <yd-tab-panel class="yd-tab-panel-ex" label="代码" name="first">配置管理</yd-tab-panel>
                 <yd-tab-panel class="yd-tab-panel-ex" label="节点树" name="second">
                     <elm-el-tree  default-expand-all :data="code" :props="defaultProps">
@@ -18,14 +18,14 @@
                                       v-show="data.type != 'template'"
                                       type="text"
                                       size="mini"
-                                      @click.stop="() => append(data)">
+                                      @click.stop="() => setStyle(data, node)">
                                 样式
                               </elm-el-button>
                               <elm-el-button
                                       v-show="data.type != 'template'"
                                       type="text"
                                       size="mini"
-                                      @click.stop="() => setting(node, data)">
+                                      @click.stop="() => setting(data, node)">
                                 配置
                               </elm-el-button>
                               <elm-el-button
@@ -71,17 +71,13 @@
                     </elm-el-input>
                 </yd-tab-panel>
                 <yd-tab-panel class="yd-tab-panel-ex" label="配置" name="fourth" v-show="editComponent.id !== 0">
-                    <elm-el-form label-position="left" label-width="80px" :model="formLabelAlign">
-                        <elm-el-form-item label="名称">
-                            <elm-el-input v-model="formLabelAlign.name"></elm-el-input>
-                        </elm-el-form-item>
-                        <elm-el-form-item label="活动区域">
-                            <elm-el-input v-model="formLabelAlign.region"></elm-el-input>
-                        </elm-el-form-item>
-                        <elm-el-form-item label="活动形式">
-                            <elm-el-input v-model="formLabelAlign.type"></elm-el-input>
-                        </elm-el-form-item>
-                    </elm-el-form>
+                    <div style="padding: 0.8em 0.5em;">
+                        <p class="setting-title">Props</p>
+                        <setting-from ref="settingFromProps"></setting-from>
+                        <iv-process :percent="25" hide-info></iv-process>
+                        <p class="setting-title">domProps</p>
+                        <setting-from ref="settingFromDomProps"></setting-from>
+                    </div>
                 </yd-tab-panel>
             </yd-tab>
         </div>
@@ -109,7 +105,8 @@
 <script>
     import preview from './../preview'
     import editStyle from './../edit-style'
-    import 'vue-ydui/dist/ydui.base.css'
+    import settingFrom from './setting-form'
+    // import 'vue-ydui/dist/ydui.base.css'
     import { ydComponent } from "../../../template/ydui/registerAllComponent"
     import { baseComponent } from "../../../template/baseUI/registerAllComponent"
     import { recoverYduiSlot } from "../../../template/ydui/buildDefaultObject"
@@ -122,7 +119,8 @@
         name: 'vue-editor',
         components: {
             preview,
-            editStyle
+            editStyle,
+            settingFrom
         },
         data() {
             return {
@@ -143,7 +141,9 @@
                     styleText: '{}',
                     id: 0,
                     node: {},
-                    data: {}
+                    data: {},
+                    val: {},
+                    els: {}
                 },
                 defaultProps: {
                     children: 'children',
@@ -154,75 +154,9 @@
                     {
                         type: 'template',
                         title: 'template',
+                        fresh: 0,
                         id: 0,
-                        children: [
-                            // {
-                            //     title: '按钮',
-                            //     type: 'el',
-                            //     name: 'yd-button',
-                            //     id: 'first',
-                            //     props: {},
-                            //     style: {},
-                            //     text: 'ibas',
-                            //     children: []
-                            // },
-                            // {
-                            //     title: '列表',
-                            //     type: 'el',
-                            //     name: 'yd-list-theme',
-                            //     id: 'second',
-                            //     props: {
-                            //         theme: 3
-                            //     },
-                            //     style: {},
-                            //     children: [
-                            //         {
-                            //             "id": "list-1531463542714",
-                            //             "title": "列表",
-                            //             "name": "yd-list-theme",
-                            //             "realname": "yd-list",
-                            //             "props": { "theme": 3 },
-                            //             "type": "el",
-                            //             "children": [{
-                            //                 "id": "list-item-1531463545643",
-                            //                 "title": "列表项",
-                            //                 "name": "yd-list-item",
-                            //                 "realname": "yd-list-item",
-                            //                 "props": { "type": "a", "href": "" },
-                            //                 "type": "el",
-                            //                 "children": [{
-                            //                     "slot": "img",
-                            //                     "have": false,
-                            //                     "desc": "",
-                            //                     "id": "list-item-1531463545643img",
-                            //                     "type": "slot",
-                            //                     "title": "img"
-                            //                 }, {
-                            //                     "id": "list-item-1531463545643title",
-                            //                     "name": "span",
-                            //                     "realname": "span",
-                            //                     "style": {},
-                            //                     "text": "span",
-                            //                     "type": "el-slot",
-                            //                     "slot": "title",
-                            //                     "have": true,
-                            //                     "desc": "",
-                            //                     "title": "title"
-                            //                 }, {
-                            //                     "slot": "other",
-                            //                     "have": false,
-                            //                     "desc": "",
-                            //                     "id": "list-item-1531463545643other",
-                            //                     "type": "slot",
-                            //                     "title": "other"
-                            //                 }],
-                            //                 "style": {}
-                            //             }],
-                            //             "style": {}
-                            //         }
-                            //     ]
-                            // }
-                        ]
+                        children: []
                     }
                 ],
                 offsetLeft: 40
@@ -244,9 +178,13 @@
             // 模糊搜索 组件 方法
             querySearchComponent(qs, cb) {
                 if (qs) {
-                    qs = qs.toLowerCase()
+                    qs = qs.toLowerCase().split(":")
                     cb(this.selectComponent.ydComponentName.filter(name => {
-                        return (name.value.indexOf(qs) + 1)
+                        if (qs.length === 2 && qs[1]) {
+                            return (name.value.indexOf(qs[0]) + 1) && (name.label === qs[1])
+                        } else {
+                            return (name.value.indexOf(qs) + 1)
+                        }
                     }))
                 } else {
                     cb(this.selectComponent.ydComponentName)
@@ -254,25 +192,27 @@
             },
             // 将选中的组件添加到节点中
             handleSelect(qs) {
-                window.ret = {
-                    qs,
-                    sel: this.selectComponent
-                }
                 if (this.selectComponent.data.type === 'slot') {
                     if (this.selectComponent.data.have) {
-                        this.selectComponent.data.children.push(qs.component.createElementNode())
+                        this.selectComponent.data.children.push(Object.assign(qs.component.createElementNode(), { ind: qs.ind }))
                     } else {
-                        const newNode = qs.component.createElementNode()
+                        const node = qs.component.createElementNode()
                         this.selectComponent.data.have = true
+                        this.selectComponent.data.title += '@' + node.title
                         for (let i = 0; i < this.selectComponent.node.parent.childNodes.length; i++) {
                             if (this.selectComponent.node.parent.childNodes[i].data.id === this.selectComponent.data.id) {
-                                this.selectComponent.node.parent.data.children.splice(i, 1, Object.assign(newNode, this.selectComponent.data))
+                                this
+                                    .selectComponent.node.parent.data.children.splice(i, 1,
+                                        Object.assign(
+                                            qs.component.createElementNode(),
+                                            this.selectComponent.data, { ind: qs.ind }
+                                            ))
                                 break
                             }
                         }
                     }
                 } else {
-                    this.selectComponent.data.children.push(qs.component.createElementNode())
+                    this.selectComponent.data.children.push(Object.assign(qs.component.createElementNode(), { ind: qs.ind }))
                 }
                 this.selectComponent.dialog = false
                 this.selectComponent.componentName = ''
@@ -283,7 +223,7 @@
                 try {
                     const style = JSON.parse(this.editComponent.styleText.replace(/'/g, '"'))
                     this.editComponent.style = style
-                    console.log(this.editComponent.style)
+                    this.editComponent.data.style = style
                 } catch (e) {
                     console.log(e)
                 }
@@ -312,21 +252,41 @@
                 this.editComponent.node = node
                 this.editComponent.id = data.id
                 this.activeName = 3
+                this.$refs.settingFromProps.els = this.selectComponent.ydComponentName[data.ind].component.props || {}
+                this.$refs.settingFromDomProps.els = this.selectComponent.ydComponentName[data.ind].component.domProps || {}
+                this.$refs.settingFromProps.val = data.props || {}
+                this.$refs.settingFromDomProps.val = data.domProps || {}
+                console.log(data, this.selectComponent.ydComponentName[data.ind].component)
+            },
+            // 修改样式
+            setStyle(data, node) {
+                this.activeName = 2
+                this.editComponent.styleText = JSON.stringify(data.style)
+                this.editComponent.data = data
+                this.editComponent.node = node
+                this.editComponent.id = data.id
             }
         },
         mounted() {
             window.$this = this
+            let ind = 0
             for (const i in ydComponent) {
                 this.selectComponent.ydComponentName.push({
                     value: ydComponent[i].name.toLowerCase() + ' >>> ' + ydComponent[i].label,
-                    component: ydComponent[i]
+                    component: ydComponent[i],
+                    ind: ind,
+                    label: 'ydui'
                 })
+                ind++
             }
             for (const i in baseComponent) {
                 this.selectComponent.ydComponentName.push({
                     value: baseComponent[i].name.toLowerCase() + ' >>> 基础组件',
-                    component: baseComponent[i]
+                    component: baseComponent[i],
+                    ind: ind,
+                    label: 'base'
                 })
+                ind++
             }
         },
         watch: {
@@ -338,8 +298,24 @@
 </script>
 
 <style>
+    @import "./extern/ydui.base.css";
+
     .highlighted {
         background: #e4f1ff !important;
+    }
+
+    .ivu-progress-inner {
+        display: inline-block;
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 100px;
+        vertical-align: middle;
+    }
+    .ivu-progreess-bg {
+        border-radius: 100px;
+        background-color: #2db7f5;
+        transition: all .2s linear;
+        position: relative;
     }
 </style>
 <style scoped>
@@ -363,8 +339,14 @@
         float: left;
         width: 40%;
         padding-right: 0.1rem;
+        height: calc(100% - 38px);
     }
     .yd-tab-panel-ex {
         height: calc(100% - 47px);
+    }
+    .setting-title {
+        font-size: 14px;
+        color: #909399;
+        line-height: 1.5em;
     }
 </style>

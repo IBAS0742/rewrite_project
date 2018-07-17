@@ -117,6 +117,7 @@ const buildNames = (obj) => {
             tmp.slot = obj[i].slot
         }
         if (obj[i].props) {
+            let props = {}
             tmp.props = obj[i].props
         }
         ret.push(tmp)

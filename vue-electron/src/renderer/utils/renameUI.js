@@ -14,6 +14,12 @@ export const renameUIComponent = (element, name, Vue) => {
             // console.log(element[i].name)
             // element[i].name = name + element[i].name
             Vue.component(name + element[i].name, element[i])
+        } else if (element[i].props) {
+            if (element[i].props.percent) {
+                Vue.component(name + 'Process', element[i])
+            } else if (element[i].props.duration) {
+                Vue.component(name + 'BackTop', element[i])
+            }
         }
     }
 }

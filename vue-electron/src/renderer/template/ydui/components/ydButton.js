@@ -2,29 +2,53 @@ import { buildYduiProps } from "../buildDefaultObject";
 
 export const ydButton = (function () {
     const props = Object.assign({}, Vue.temp.ydui.Button.props, {
-        "type": buildYduiProps([ "primary", " danger", " warning", " hollow", " disabled" ], "primary", "string", "按钮类型"),
-        "size": buildYduiProps([ "small", " large" ], "small", "string", "按钮大小"),
+        "type": buildYduiProps([ "primary", "danger", "warning", "hollow", "disabled" ], "primary", "string", "按钮类型"),
+        "size": buildYduiProps([ "small", "large" ], "small", "string", "按钮大小"),
         "bgcolor": buildYduiProps(null, "", "string && 常规颜色值", "按钮背景颜色"),
         "color": buildYduiProps(null, "", "string && 常规颜色值", "按钮字体颜色"),
         "disabled": buildYduiProps(null, false, "boolean", "是否禁用"),
-        "shape": buildYduiProps([ "square", " circle" ], "square", "string", "形状（分为直角square和大圆角circle）"),
-        "action-type": buildYduiProps([ "button", " submit", " reset" ], "button", "string", "渲染后 <button> 的类型")
+        "shape": buildYduiProps([ "square", "circle" ], "square", "string", "形状（分为直角square和大圆角circle）"),
+        "actionType": buildYduiProps([ "button", "submit", "reset" ], "button", "string", "渲染后 <button> 的类型")
     })
+    const domProps = {
+        innerHTML: {
+            type: 'string',
+            default: '按钮'
+        }
+    }
     return {
         // 这个是在 dom 树中显示可以用的
         name: 'ydButton',
         // 这个是方便阅读定义的
         label: '按钮',
         // 这里从 ydui 中获取 props 的定义
-        props,
+        props : ((props) => {
+            let p = {}
+            for (let i in props) {
+                p[i.replace(/[A-Z]/g,function (i) {
+                    return '-' + i.toLowerCase()
+                })] = props[i]
+            }
+            return p
+        })(props),
+        domProps,
         // 生成基础的 props 对象
         baseProps: ((props) => {
+            let p = {}
+            for (let i in props) {
+                p[i.replace(/[A-Z]/g,function (i) {
+                    return '-' + i.toLowerCase()
+                })] = props[i].default
+            }
+            return p
+        })(props),
+        baseDomProps: ((props) => {
             let p = {}
             for (let i in props) {
                 p[i] = props[i].default
             }
             return p
-        })(props),
+        })(domProps),
         // 生成一个基础的 yd-button 对象的节点
         createElementNode() {
             return {
@@ -36,7 +60,9 @@ export const ydButton = (function () {
                 realname: 'yd-button',
                 props: this.baseProps,
                 // 默认内容
-                text: 'button',
+                domProps: {
+                    innerHTML: '按钮'
+                },
                 type: 'el',
                 children: [],
                 style: {}

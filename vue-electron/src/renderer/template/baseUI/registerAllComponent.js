@@ -395,7 +395,14 @@ const baseUI = [
     {
         "name":"p",
         "desc":"定义段落。",
-        "h5":false
+        "h5":false,
+        // text: 'p',
+        domProps: {
+            innerHTML: {
+                type: 'string',
+                default: 'p'
+            }
+        }
     },
     {
         "name":"param",
@@ -471,7 +478,13 @@ const baseUI = [
         "name":"span",
         "desc":"定义文档中的节。",
         "h5":false,
-        text: 'span'
+        text: 'span',
+        domProps: {
+            innerHTML: {
+                type: 'string',
+                default: 'p'
+            }
+        }
     },
     {
         "name":"strike",
@@ -604,11 +617,15 @@ const baseUI = [
 export const baseComponent = ((baseUI) => {
     const ret = {}
     baseUI.forEach(ui => {
-        ret[ui.name] = {
-            label: ui.name,
-            name: ui.name,
+        ret[ui.name] = Object.assign({
             createElementNode() {
                 const id = this.name + (new Date()).getTime()
+                const domProps = {}
+                if (ui.domProps) {
+                    for (var i in ui.domProps) {
+                        domProps[i] = ui.domProps[i].default
+                    }
+                }
                 return Object.assign({
                     id,
                     name: this.name,
@@ -616,10 +633,13 @@ export const baseComponent = ((baseUI) => {
                     style: {},
                     type: 'el',
                     title: this.name,
-                    children: []
-                }, ui)
+                    children: [],
+                    desc: ui.desc,
+                    h5: ui.h5 || false,
+                    domProps
+                })
             }
-        }
+        },ui)
     })
     return ret
 })(baseUI)

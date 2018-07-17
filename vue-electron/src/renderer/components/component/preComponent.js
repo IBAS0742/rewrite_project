@@ -24,7 +24,18 @@ export const recursionRender = (code, h) => {
         }
     }
     if (comps.length === 0 && code.text) {
-        return h(code.name, code.text, {
+        return h(code.name, code.text, Object.assign({
+            class: code.class,
+            style: code.style,
+            attrs: code.attrs,
+            props: code.props,
+            domProps: code.domProps,
+            on: code.on,
+            nativeOn: code.nativeOn
+        }, ((code.slot && code.slot !== '-') ? { slot: code.slot } : {}),
+            ((code.socpedSlots && code.socpedSlots !== '-') ? { socpedSlots: code.socpedSlots } : {})))
+    } else {
+        return h(code.name, Object.assign({
             class: code.class,
             style: code.style,
             attrs: code.attrs,
@@ -33,19 +44,7 @@ export const recursionRender = (code, h) => {
             on: code.on,
             nativeOn: code.nativeOn,
             socpedSlots: code.scopedSlots
-        })
-    } else {
-        return h(code.name, {
-            class: code.class,
-            style: code.style,
-            attrs: code.attrs,
-            props: code.props,
-            domProps: code.domProps,
-            on: code.on,
-            nativeOn: code.nativeOn,
-            socpedSlots: code.scopedSlots,
-            slot: code.slot
-        }, comps)
+        }, ((code.slot && code.slot !== '-') ? { slot: code.slot } : {})), comps)
     }
 }
 
