@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydDateTime = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.DateTime.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.DateTime.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.DateTime.props[i]
+    }
+    props = Object.assign({}, props, {
 		"init-emit": buildYduiProps(null, "true", "boolean", "是否初始化修正值"),
 		"readonly": buildYduiProps(null, "false", "boolean", "是否只读"),
 		"type": buildYduiProps([ "datetime", " date", " time", " month", " day" ], "datetime", "string", "时间类型"),
@@ -26,7 +32,7 @@ export const ydDateTime = (function () {
 		"confirm-text": buildYduiProps(null, "确定", "string", "确定文字"),
 		"placeholder": buildYduiProps(null, null, "string", "没有内容提示的文字（:init-emit='false'时生效）"),
 		"callback": buildYduiProps(null, null, "function", "点击确定后回调"),
-		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度")
+		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度（v1.2.1新增）")
     })
     return {
         // 这个是在 dom 树中显示可以用的

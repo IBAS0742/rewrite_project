@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydScrollNav = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.ScrollNav.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.ScrollNav.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.ScrollNav.props[i]
+    }
+    props = Object.assign({}, props, {
 		"index": buildYduiProps(null, "0", "number", "高亮索引"),
 		"height": buildYduiProps(null, ".9rem", "string && (px或rem)", "导航高度"),
 		"color": buildYduiProps(null, "#333", "string && 常规颜色值", "字体颜色"),
@@ -30,12 +36,10 @@ export const ydScrollNav = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-scroll-nav 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'scrollNav-' + (new Date()).getTime()
             return {
                 id: 'scrollNav-' + (new Date()).getTime(),
@@ -64,7 +68,13 @@ export const ydScrollNav = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydScrollNavPanel = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.ScrollNavPanel.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.ScrollNavPanel.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.ScrollNavPanel.props[i]
+    }
+    props = Object.assign({}, props, {
 		"label": buildYduiProps(null, null, "string", "导航标题")
     })
     return {
@@ -81,12 +91,10 @@ export const ydScrollNavPanel = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-scroll-nav-panel 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'scrollNavPanel-' + (new Date()).getTime()
             return {
                 id: 'scrollNavPanel-' + (new Date()).getTime(),

@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydSlider = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Slider.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Slider.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Slider.props[i]
+    }
+    props = Object.assign({}, props, {
 		"index": buildYduiProps(null, "1", "number", "初始打开第n张图片"),
 		"speed": buildYduiProps(null, "300", "number", "切换速度（单位毫秒）"),
 		"autoplay": buildYduiProps(null, "0", "number", "自动播放时间（单位毫秒）"),
@@ -61,7 +67,13 @@ export const ydSlider = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydSliderItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.SliderItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.SliderItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.SliderItem.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydPullRefresh = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.PullRefresh.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.PullRefresh.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.PullRefresh.props[i]
+    }
+    props = Object.assign({}, props, {
 		"callback": buildYduiProps(null, null, "function", "当拖动列表达到一定位置后将会调用该自定义方法"),
 		"stop-drag": buildYduiProps(null, "false", "boolean", "是否禁止拖动加载内容"),
 		"pull-text": buildYduiProps(null, "下拉刷新", "string", "下拉提示文字"),

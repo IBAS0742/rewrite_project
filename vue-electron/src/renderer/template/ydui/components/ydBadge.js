@@ -6,8 +6,14 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydBadge = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Badge.props, {
-		"type": buildYduiProps([ "primary", " danger", " warning", " hollow" ], "", "string", "角标类型[默认为灰底白字]"),
+    let props = {}
+    for (let i in Vue.temp.ydui.Badge.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Badge.props[i]
+    }
+    props = Object.assign({}, props, {
+		"type": buildYduiProps([ "primary", " danger", " warning", " hollow" ], "primary", "string", "角标类型[默认为灰底白字]"),
 		"shape": buildYduiProps([ "circle", " square" ], "circle", "string", "角标形状（圆形和方形）"),
 		"color": buildYduiProps(null, null, "string && 常规颜色值", "角标颜色"),
 		"bgcolor": buildYduiProps(null, null, "string && 常规颜色值", "角标背景色")

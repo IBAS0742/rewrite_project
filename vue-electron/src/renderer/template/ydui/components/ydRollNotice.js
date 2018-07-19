@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydRollNotice = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.RollNotice.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.RollNotice.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.RollNotice.props[i]
+    }
+    props = Object.assign({}, props, {
 		"height": buildYduiProps(null, "30", "number", "高度（px）"),
 		"speed": buildYduiProps(null, "500", "number", "切换速度（毫秒）"),
 		"autoplay": buildYduiProps(null, "3000", "number", "自动播放时间（毫秒）"),
@@ -59,7 +65,13 @@ export const ydRollNotice = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydRollNoticeItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.RollNoticeItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.RollNoticeItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.RollNoticeItem.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydCountUp = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CountUp.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CountUp.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CountUp.props[i]
+    }
+    props = Object.assign({}, props, {
 		"start": buildYduiProps(null, "true", "boolean", "是否立即开始动画"),
 		"startnum": buildYduiProps(null, null, "number", "开始数值"),
 		"endnum": buildYduiProps(null, null, "number", "结束数值"),
@@ -32,12 +38,10 @@ export const ydCountUp = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-count-up 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'countUp-' + (new Date()).getTime()
             return {
                 id: 'countUp-' + (new Date()).getTime(),

@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydStep = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Step.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Step.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Step.props[i]
+    }
+    props = Object.assign({}, props, {
 		"theme": buildYduiProps([ "1", " 2" ], "1", "number", "样式主题"),
 		"current": buildYduiProps(null, null, "number", "默认选中的项"),
 		"current-color": buildYduiProps(null, "#0db78a", "string && 常规颜色值", "选中项的高亮颜色")
@@ -57,7 +63,13 @@ export const ydStep = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydStepItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.StepItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.StepItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.StepItem.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

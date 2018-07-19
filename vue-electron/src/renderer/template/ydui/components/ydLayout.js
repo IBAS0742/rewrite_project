@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydLayout = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Layout.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Layout.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Layout.props[i]
+    }
+    props = Object.assign({}, props, {
 		"link": buildYduiProps(null, null, "string", "yd-navbar的跳转链接"),
 		"title": buildYduiProps(null, null, "string", "yd-navbar的标题"),
 		"show-navbar": buildYduiProps(null, "true", "boolean", "是否显示yd-navbar")

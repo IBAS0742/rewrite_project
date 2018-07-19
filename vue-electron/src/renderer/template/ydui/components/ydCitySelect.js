@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydCitySelect = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CitySelect.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CitySelect.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CitySelect.props[i]
+    }
+    props = Object.assign({}, props, {
 		"provance": buildYduiProps(null, null, "string", "初始【省】的值"),
 		"city": buildYduiProps(null, null, "string", "初始【市】的值"),
 		"area": buildYduiProps(null, null, "string", "初始【县】的值"),
@@ -15,8 +21,8 @@ export const ydCitySelect = (function () {
 		"ready": buildYduiProps(null, "true", "boolean", "是否准备就绪，异步数据时有用"),
 		"items": buildYduiProps(null, "[]", "array", "数据，内容格式有限制，具体见下文"),
 		"callback": buildYduiProps(null, null, "function", "选择结束后调用的方法，同时返回：            {                itemname1: '', //选择后【省】的名称                itemname2: '', //选择后【市】的名称                itemname3: '', //选择后【县】的名称                itemvalue1: '', //选择后【省】的值                itemvalue2: '', //选择后【市】的值                itemvalue3: '' //选择后【县】的值            }"),
-		"columns": buildYduiProps(null, null, "number", "层级数（不设置默认取数据第一个的层级数）"),
-		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度")
+		"columns": buildYduiProps(null, null, "number", "层级数（不设置默认取数据第一个的层级数）（v1.2.1新增）"),
+		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度（v1.2.1新增）")
     })
     return {
         // 这个是在 dom 树中显示可以用的

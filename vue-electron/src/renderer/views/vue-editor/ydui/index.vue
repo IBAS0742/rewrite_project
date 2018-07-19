@@ -73,18 +73,18 @@
                 <yd-tab-panel class="yd-tab-panel-ex" label="配置" name="fourth" v-show="editComponent.id !== 0">
                     <div style="padding: 0.8em 0.5em;">
                         <p class="setting-title">Props</p>
-                        <setting-from ref="settingFromProps"></setting-from>
+                        <setting-from ref="settingFromProps" :val="editComponent.props"></setting-from>
                         <iv-process :percent="25" hide-info></iv-process>
                         <p class="setting-title">domProps</p>
-                        <setting-from ref="settingFromDomProps"></setting-from>
+                        <setting-from ref="settingFromDomProps" :val="editComponent.domProps"></setting-from>
                     </div>
                 </yd-tab-panel>
             </yd-tab>
         </div>
-        <div class="right-panel" :style="'width:' + (100 - offsetLeft) + '%;display:' + ((100 - offsetLeft)? 'block':'none')">
-            <preview :code="code[0].children">
-            </preview>
-        </div>
+        <!--<div class="right-panel" :style="'width:' + (100 - offsetLeft) + '%;display:' + ((100 - offsetLeft)? 'block':'none')">-->
+            <!--<preview :code="code[0].children">-->
+            <!--</preview>-->
+        <!--</div>-->
         <ElmElDialog title="选择组件" :visible.sync="selectComponent.dialog" :modal="false">
             <elm-el-autocomplete
                     ref="autocomplete"
@@ -143,7 +143,9 @@
                     node: {},
                     data: {},
                     val: {},
-                    els: {}
+                    els: {},
+                    props: {},
+                    domProps: {}
                 },
                 defaultProps: {
                     children: 'children',
@@ -152,11 +154,184 @@
                 activeName: 1,
                 code: [
                     {
+                        name: 'template',
                         type: 'template',
                         title: 'template',
                         fresh: 0,
                         id: 0,
-                        children: []
+                        children: [
+                            {
+                                "id": "cell-group1531878588774",
+                                "title": "表单组",
+                                "name": "yd-cell-group",
+                                "realname": "yd-cell-group",
+                                "props": {
+                                    "actionType": "button",
+                                    "type": "primary",
+                                    "shape": "square",
+                                    "title": ""
+                                },
+                                "type": "el",
+                                "children": [
+                                    {
+                                        "id": "cell-item1531896088179",
+                                        "title": "表单项",
+                                        "name": "yd-cell-item",
+                                        "realname": "yd-cell-item",
+                                        "props": {
+                                            "actionType": "button",
+                                            "type": "div",
+                                            "shape": "square",
+                                            "arrow": false,
+                                            "href": ""
+                                        },
+                                        "type": "el",
+                                        "children": [
+                                            {
+                                                "slot": "icon",
+                                                "desc": "列表图标",
+                                                "have": false,
+                                                "id": "cell-item1531896088179icon",
+                                                "type": "slot",
+                                                "title": "列表图标",
+                                                "naturalTitle": "列表图标"
+                                            },
+                                            {
+                                                "id": "cell-item1531896088179left",
+                                                "name": "span",
+                                                "realname": "span",
+                                                "style": {},
+                                                "type": "slot",
+                                                "title": "列表左侧内容@span",
+                                                "children": [],
+                                                "desc": "列表左侧内容",
+                                                "h5": false,
+                                                "domProps": {
+                                                    "innerHTML": "span"
+                                                },
+                                                "slot": "left",
+                                                "have": true,
+                                                "naturalTitle": "列表左侧内容",
+                                                "ind": 157
+                                            },
+                                            {
+                                                "id": "cell-item1531896088179right",
+                                                "title": "列表右侧内容@输入框",
+                                                "name": "yd-input",
+                                                "realname": "yd-input",
+                                                "props": {
+                                                    "name": "",
+                                                    "placeholder": "",
+                                                    "value": "",
+                                                    "readonly": false,
+                                                    "disabled": false,
+                                                    "regex": "",
+                                                    "autocomplete": "off",
+                                                    "show-clear-icon": true,
+                                                    "show-error-icon": true,
+                                                    "show-success-icon": true,
+                                                    "show-required-icon": true,
+                                                    "required": false,
+                                                    "type": "text",
+                                                    "max": 0,
+                                                    "min": 0
+                                                },
+                                                "text": "input",
+                                                "type": "slot",
+                                                "children": [],
+                                                "style": {},
+                                                "slot": "right",
+                                                "desc": "列表右侧内容",
+                                                "have": true,
+                                                "naturalTitle": "列表右侧内容",
+                                                "ind": 22
+                                            }
+                                        ],
+                                        "style": {},
+                                        "ind": 7
+                                    }
+                                ],
+                                "style": {},
+                                "ind": 6
+                            },
+                            {
+                                "id": "cell-item1531896113706",
+                                "title": "表单项",
+                                "name": "yd-cell-item",
+                                "realname": "yd-cell-item",
+                                "props": {
+                                    "actionType": "button",
+                                    "type": "div",
+                                    "shape": "square",
+                                    "arrow": false,
+                                    "href": ""
+                                },
+                                "type": "el",
+                                "children": [
+                                    {
+                                        "slot": "icon",
+                                        "desc": "列表图标",
+                                        "have": false,
+                                        "id": "cell-item1531896113706icon",
+                                        "type": "slot",
+                                        "title": "列表图标",
+                                        "naturalTitle": "列表图标"
+                                    },
+                                    {
+                                        "id": "cell-item1531896113706left",
+                                        "name": "span",
+                                        "realname": "span",
+                                        "style": {},
+                                        "type": "slot",
+                                        "title": "列表左侧内容@span",
+                                        "children": [],
+                                        "desc": "列表左侧内容",
+                                        "h5": false,
+                                        "domProps": {
+                                            "innerHTML": "span"
+                                        },
+                                        "slot": "left",
+                                        "have": true,
+                                        "naturalTitle": "列表左侧内容",
+                                        "ind": 157
+                                    },
+                                    {
+                                        "id": "cell-item1531896113706right",
+                                        "title": "列表右侧内容@输入框",
+                                        "name": "yd-input",
+                                        "realname": "yd-input",
+                                        "props": {
+                                            "name": "",
+                                            "placeholder": "",
+                                            "value": "",
+                                            "readonly": false,
+                                            "disabled": false,
+                                            "regex": "",
+                                            "autocomplete": "off",
+                                            "show-clear-icon": true,
+                                            "show-error-icon": true,
+                                            "show-success-icon": true,
+                                            "show-required-icon": true,
+                                            "required": false,
+                                            "type": "text",
+                                            "max": 0,
+                                            "min": 0
+                                        },
+                                        "text": "input",
+                                        "type": "slot",
+                                        "children": [],
+                                        "style": {},
+                                        "slot": "right",
+                                        "desc": "列表右侧内容",
+                                        "have": true,
+                                        "naturalTitle": "列表右侧内容",
+                                        "ind": 22
+                                    }
+                                ],
+                                "style": {},
+                                "ind": 7
+                            }
+                        ]
                     }
                 ],
                 offsetLeft: 40
@@ -201,6 +376,10 @@
                         this.selectComponent.data.title += '@' + node.title
                         for (let i = 0; i < this.selectComponent.node.parent.childNodes.length; i++) {
                             if (this.selectComponent.node.parent.childNodes[i].data.id === this.selectComponent.data.id) {
+                                console.log(Object.assign(
+                                    qs.component.createElementNode(),
+                                    this.selectComponent.data, { ind: qs.ind }
+                                ))
                                 this
                                     .selectComponent.node.parent.data.children.splice(i, 1,
                                         Object.assign(
@@ -253,9 +432,15 @@
                 this.editComponent.id = data.id
                 this.activeName = 3
                 this.$refs.settingFromProps.els = this.selectComponent.ydComponentName[data.ind].component.props || {}
+                // this.$refs.settingFromProps.$$parent = this.selectComponent.ydComponentName[data.ind].component
+                this.$refs.settingFromProps.$$ObjName = 'props'
                 this.$refs.settingFromDomProps.els = this.selectComponent.ydComponentName[data.ind].component.domProps || {}
-                this.$refs.settingFromProps.val = data.props || {}
-                this.$refs.settingFromDomProps.val = data.domProps || {}
+                // this.$refs.settingFromDomProps.$$parent = this.selectComponent.ydComponentName[data.ind].component
+                this.$refs.settingFromDomProps.$$ObjName = 'domProps'
+                this.editComponent.props = data.props || {}
+                // this.$refs.settingFromProps.val = data.props || {}
+                this.editComponent.domProps = data.domProps || {}
+                // this.$refs.settingFromDomProps.val = data.domProps || {}
                 console.log(data, this.selectComponent.ydComponentName[data.ind].component)
             },
             // 修改样式

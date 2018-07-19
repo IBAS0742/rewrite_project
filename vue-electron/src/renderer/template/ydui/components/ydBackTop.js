@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydBackTop = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.BackTop.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.BackTop.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.BackTop.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

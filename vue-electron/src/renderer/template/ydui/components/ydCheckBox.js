@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydCheckBox = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CheckBox.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CheckBox.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CheckBox.props[i]
+    }
+    props = Object.assign({}, props, {
 		"val": buildYduiProps(null, null, "string || number || boolean", "值"),
 		"disabled": buildYduiProps(null, "false", "boolean", "是否禁用"),
 		"color": buildYduiProps(null, "#4cd864", "string && 常规颜色值", "图标颜色【单个使用才会生效】"),
@@ -62,7 +68,13 @@ export const ydCheckBox = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydCheckBoxGroup = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CheckBoxGroup.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CheckBoxGroup.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CheckBoxGroup.props[i]
+    }
+    props = Object.assign({}, props, {
 		"color": buildYduiProps(null, "#4cd864", "string && 常规颜色值", "图标颜色"),
 		"size": buildYduiProps(null, "20", "number", "图标大小，默认为px")
     })

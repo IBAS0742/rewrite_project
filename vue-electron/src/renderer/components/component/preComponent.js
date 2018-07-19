@@ -3,7 +3,9 @@ export const recursionRender = (code, h) => {
     if (code.children) {
         if (code.children instanceof Array) {
             code.children.forEach(child => {
-                comps.push(recursionRender(child, h))
+                if (child.name) {
+                    comps.push(recursionRender(child, h))
+                }
                 // if (child.type === 'ul') {
                 //     comps.push(recursionRender(child, h))
                 // } else if (child.slot) {
@@ -22,6 +24,7 @@ export const recursionRender = (code, h) => {
                 // }
             })
         }
+        console.log(comps)
     }
     if (comps.length === 0 && code.text) {
         return h(code.name, code.text, Object.assign({

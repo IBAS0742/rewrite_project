@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydProgressBar = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.ProgressBar.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.ProgressBar.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.ProgressBar.props[i]
+    }
+    props = Object.assign({}, props, {
 		"type": buildYduiProps([ "circle", "line" ], "circle", "string", "进度条类型"),
 		"progress": buildYduiProps(null, "0", "float", "进度所占百分比（取值范围0-1）"),
 		"fill-color": buildYduiProps(null, null, "string && 常规颜色值", "进度条背景颜色，线形进度条无效"),

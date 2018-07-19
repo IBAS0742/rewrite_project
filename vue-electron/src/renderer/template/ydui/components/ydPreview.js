@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydPreview = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Preview.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Preview.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Preview.props[i]
+    }
+    props = Object.assign({}, props, {
 		"buttons": buildYduiProps(null, null, "array", "按钮们：                [{                label: string, //文字                link: [string, object], //跳转链接，当为object时，为router-link                color: string, //文字颜色                click: function, //点击回调函数            }]")
     })
     return {
@@ -55,7 +61,13 @@ export const ydPreview = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydPreviewHeader = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.PreviewHeader.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.PreviewHeader.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.PreviewHeader.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {
@@ -115,7 +127,13 @@ export const ydPreviewHeader = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydPreviewItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.PreviewItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.PreviewItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.PreviewItem.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

@@ -6,12 +6,18 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydPopup = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Popup.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Popup.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Popup.props[i]
+    }
+    props = Object.assign({}, props, {
 		"position": buildYduiProps([ "bottom", " center", " left", " right" ], "bottom", "string", "显示位置"),
 		"height": buildYduiProps(null, "auto", "string", "高度"),
 		"width": buildYduiProps(null, "auto", "string", "宽度"),
 		"close-on-masker": buildYduiProps(null, "true", "boolean", "是否点击遮罩关闭弹窗"),
-		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度")
+		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度（v1.2.1新增）")
     })
     return {
         // 这个是在 dom 树中显示可以用的
@@ -43,12 +49,10 @@ export const ydPopup = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-popup 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             let id = 'popup-' + (new Date()).getTime()
             return {
                 // #normal#id: 'popup-' + (new Date()).getTime(),

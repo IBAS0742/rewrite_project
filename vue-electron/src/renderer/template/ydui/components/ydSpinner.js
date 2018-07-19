@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydSpinner = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Spinner.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Spinner.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Spinner.props[i]
+    }
+    props = Object.assign({}, props, {
 		"unit": buildYduiProps(null, "1", "number", "累计值"),
 		"max": buildYduiProps(null, null, "number", "最大值"),
 		"min": buildYduiProps(null, "累计值", "number", "最小值（不设置最小值，则默认为累计值）"),
@@ -29,12 +35,10 @@ export const ydSpinner = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-spinner 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'spinner-' + (new Date()).getTime()
             return {
                 id: 'spinner-' + (new Date()).getTime(),

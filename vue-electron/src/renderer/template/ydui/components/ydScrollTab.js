@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydScrollTab = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.ScrollTab.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.ScrollTab.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.ScrollTab.props[i]
+    }
+    props = Object.assign({}, props, {
 		"index": buildYduiProps(null, "0", "number", "高亮索引"),
 		"callback": buildYduiProps(null, null, "function", "切换回调函数（返回当前索引）")
     })
@@ -56,7 +62,13 @@ export const ydScrollTab = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydScrollTabPanel = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.ScrollTabPanel.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.ScrollTabPanel.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.ScrollTabPanel.props[i]
+    }
+    props = Object.assign({}, props, {
 		"label": buildYduiProps(null, null, "string", "选项卡标题"),
 		"icon": buildYduiProps(null, null, "string", "图标（只支持图标样式名）"),
 		"active": buildYduiProps(null, null, "boolean", "是否激活当前选项卡（v1.1.8已废除，使用 yd-scrolltab 的 index 替代）")
@@ -79,7 +91,6 @@ export const ydScrollTabPanel = (function () {
         })(props),
         // 生成一个基础的 yd-scroll-tab-panel 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'scrollTabPanel-' + (new Date()).getTime()
             return {
                 id: 'scrollTabPanel-' + (new Date()).getTime(),

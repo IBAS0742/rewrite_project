@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydCountDown = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CountDown.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CountDown.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CountDown.props[i]
+    }
+    props = Object.assign({}, props, {
 		"time": buildYduiProps(null, null, "string", "结束时间点，时间格式"),
 		"format": buildYduiProps(null, "{%d}天{%h}时{%m}分{%s}秒", "string", "模板参数"),
 		"timetype": buildYduiProps([ "datetime", " second", "" ], "datetime", "string", "传入时间类型，datetime：结束时间（时间格式），second：剩余时间（秒）"),

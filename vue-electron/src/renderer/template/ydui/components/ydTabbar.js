@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydTabBar = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TabBar.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TabBar.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TabBar.props[i]
+    }
+    props = Object.assign({}, props, {
 		"fixed": buildYduiProps(null, "false", "boolean", "是否fixed定位"),
 		"active-color": buildYduiProps(null, "#09bb07", "string", "选中颜色 && 常规颜色值"),
 		"bgcolor": buildYduiProps(null, "#fff", "string && 常规颜色值", "背景颜色"),
@@ -61,7 +67,13 @@ export const ydTabBar = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydTabBarItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TabBarItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TabBarItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TabBarItem.props[i]
+    }
+    props = Object.assign({}, props, {
 		"link": buildYduiProps(null, null, "string", "导航链接"),
 		"type": buildYduiProps([ "link", "a" ], "link", "string", "链接的类型，type='link'的link将会解析为路由，type='a'是普通<a>"),
 		"tag": buildYduiProps(null, null, "string", "router-link的tag属性，type='link'时生效"),

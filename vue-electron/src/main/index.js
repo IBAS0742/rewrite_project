@@ -32,6 +32,8 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  f()
 }
 
 app.on('ready', createWindow)
@@ -86,3 +88,14 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
+
+/**
+ * 子页面，用于动态渲染 Vue
+ * */
+function f() {
+    const win = new BrowserWindow({ width: 400, height: 320 })
+    const curl = process.env.NODE_ENV === 'development'
+        ? `http://localhost:9080/#/result`
+        : `file://${__dirname}/index.html#/result`
+    win.loadURL(curl)
+}

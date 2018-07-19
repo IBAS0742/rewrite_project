@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydLightBox = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.LightBox.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.LightBox.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.LightBox.props[i]
+    }
+    props = Object.assign({}, props, {
 		"num": buildYduiProps(null, "0", "number", "图片个数（异步数据需指定）"),
 		"close-text": buildYduiProps(null, "关闭", "string", "关闭提示文字")
     })
@@ -56,7 +62,13 @@ export const ydLightBox = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydLightBoxImg = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.LightBoxImg.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.LightBoxImg.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.LightBoxImg.props[i]
+    }
+    props = Object.assign({}, props, {
 		"src": buildYduiProps(null, null, "string", "图片路径"),
 		"original": buildYduiProps(null, null, "string", "原图路径（不指定将使用src）")
     })
@@ -106,7 +118,13 @@ export const ydLightBoxImg = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydLightBoxTxt = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.LightBoxTxt.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.LightBoxTxt.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.LightBoxTxt.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

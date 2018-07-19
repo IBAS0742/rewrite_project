@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydNavBar = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.NavBar.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.NavBar.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.NavBar.props[i]
+    }
+    props = Object.assign({}, props, {
 		"title": buildYduiProps(null, null, "string", "导航标题"),
 		"fixed": buildYduiProps(null, "false", "boolean", "是否fixed定位"),
 		"bgcolor": buildYduiProps(null, "#fff", "string && 常规颜色值", "背景颜色"),
@@ -76,7 +82,13 @@ export const ydNavBar = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydNavBarBackIcon = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.NavBarBackIcon.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.NavBarBackIcon.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.NavBarBackIcon.props[i]
+    }
+    props = Object.assign({}, props, {
 		"color": buildYduiProps(null, "#5c5c5c", "string", "图标颜色")
     })
     return {
@@ -93,12 +105,10 @@ export const ydNavBarBackIcon = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-nav-bar-back-icon 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'navBarBackIcon-' + (new Date()).getTime()
             return {
                 id: 'navBarBackIcon-' + (new Date()).getTime(),
@@ -127,7 +137,13 @@ export const ydNavBarBackIcon = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydNavBarNextIcon = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.NavBarNextIcon.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.NavBarNextIcon.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.NavBarNextIcon.props[i]
+    }
+    props = Object.assign({}, props, {
 		"color": buildYduiProps(null, "#5c5c5c", "string", "图标颜色")
     })
     return {
@@ -144,12 +160,10 @@ export const ydNavBarNextIcon = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-nav-bar-next-icon 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = 'navBarNextIcon-' + (new Date()).getTime()
             return {
                 id: 'navBarNextIcon-' + (new Date()).getTime(),

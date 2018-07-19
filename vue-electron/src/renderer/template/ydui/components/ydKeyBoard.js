@@ -6,14 +6,20 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydKeyBoard = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.KeyBoard.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.KeyBoard.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.KeyBoard.props[i]
+    }
+    props = Object.assign({}, props, {
 		"title": buildYduiProps(null, "ydui安全键盘", "string", "键盘提示标题"),
 		"cancel-text": buildYduiProps(null, "取消", "string", "取消文字"),
 		"input-text": buildYduiProps(null, "输入数字密码", "string", "输入提示标题"),
 		"disorder": buildYduiProps(null, "false", "boolean", "是否打乱键盘顺序"),
 		"callback": buildYduiProps(null, null, "function", "6位密码输入完后调用的方法"),
 		"trigger-close": buildYduiProps(null, "true", "boolean", "是否点击遮罩关闭键盘"),
-		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度")
+		"masker-opacity": buildYduiProps(null, ".5", "number", "遮罩层透明度（v1.2.1新增）")
     })
     return {
         // 这个是在 dom 树中显示可以用的

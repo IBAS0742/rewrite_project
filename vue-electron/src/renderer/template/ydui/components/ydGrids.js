@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydGridsGroup = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.GridsGroup.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.GridsGroup.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.GridsGroup.props[i]
+    }
+    props = Object.assign({}, props, {
 		"rows": buildYduiProps([ "2", " 3", " 4", " 5" ], "4", "number", "每行显示列数"),
 		"title": buildYduiProps(null, null, "string", "每组表格标题"),
 		"item-height": buildYduiProps(null, "0", "string && (px或rem)", "设置 yd-grids-item 的高度（防止页面内容高度不一致时导致页面错乱），默认0为不限制")
@@ -57,7 +63,13 @@ export const ydGridsGroup = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydGridsItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.GridsItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.GridsItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.GridsItem.props[i]
+    }
+    props = Object.assign({}, props, {
 		"type": buildYduiProps([ "link", " a" ], "link", "string", "渲染后dom的类型，type='link'将会解析为路由，type='a'则解析为普通<a>"),
 		"link": buildYduiProps(null, null, "string || object", "跳转url")
     })

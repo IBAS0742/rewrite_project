@@ -161,12 +161,21 @@ const propsType = {
     }
 }
 
-
-export const buildYduiProps = (range, defaultV, type, desc) => {
+/**
+ * range : 取值范围
+ * defaultV : 默认值
+ * type : 类型
+ * desc : 描述
+ * und : undefind
+ * */
+export const buildYduiProps = (range, defaultV, type, desc, und) => {
     type = type || 'string'
     defaultV = propsType[type].cb(defaultV)
     if (type === 'boolean') {
         range = [true, false]
+    }
+    if (range instanceof Array) {
+        range.map(r => r.trim ? r.trim() : r )
     }
     return {
         type,
@@ -183,7 +192,8 @@ export const buildYduiSlot = (slots, id) => {
             id: id + slots[i].slot,
             type: 'slot',
             title: slots[i].desc || slots[i].slot,
-            naturalTitle: slots[i].desc || slots[i].slot
+            naturalTitle: slots[i].desc || slots[i].slot,
+            name: 'p'
         }))
     }
     return s

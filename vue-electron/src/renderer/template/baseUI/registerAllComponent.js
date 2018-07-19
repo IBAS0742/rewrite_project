@@ -482,7 +482,7 @@ const baseUI = [
         domProps: {
             innerHTML: {
                 type: 'string',
-                default: 'p'
+                default: 'span'
             }
         }
     },

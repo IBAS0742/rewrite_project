@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydTextArea = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TextArea.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TextArea.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TextArea.props[i]
+    }
+    props = Object.assign({}, props, {
 		"maxlength": buildYduiProps(null, null, "number", "最大输入字数"),
 		"placeholder": buildYduiProps(null, null, "string", "初始提示文字"),
 		"readonly": buildYduiProps(null, "false", "boolean", "是否只读"),

@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydRate = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Rate.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Rate.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Rate.props[i]
+    }
+    props = Object.assign({}, props, {
 		"count": buildYduiProps(null, "5", "number", "星星个数"),
 		"size": buildYduiProps(null, ".5rem（25px）", "string", "图标大小"),
 		"color": buildYduiProps(null, null, "string", "初始颜色 && 常规颜色值"),

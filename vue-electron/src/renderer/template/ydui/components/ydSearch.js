@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydSearch = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Search.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Search.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Search.props[i]
+    }
+    props = Object.assign({}, props, {
 		"placeholder": buildYduiProps(null, "搜 索", "string", "placeholder提示文字"),
 		"cancel-text": buildYduiProps(null, "取消", "string", "取消按钮文字"),
 		"on-submit": buildYduiProps(null, null, "function", "提交时触发方法"),

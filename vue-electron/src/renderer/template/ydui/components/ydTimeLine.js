@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydTimeLine = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TimeLine.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TimeLine.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TimeLine.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {
@@ -55,7 +61,13 @@ export const ydTimeLine = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydTimeLineItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TimeLineItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TimeLineItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TimeLineItem.props[i]
+    }
+    props = Object.assign({}, props, {
 
     })
     return {

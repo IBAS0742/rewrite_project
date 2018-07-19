@@ -6,12 +6,18 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydTab = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Tab.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Tab.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Tab.props[i]
+    }
+    props = Object.assign({}, props, {
 		"active-color": buildYduiProps(null, "#ff5e53", "string && 常规颜色值", "选中时高亮的颜色值"),
 		"callback": buildYduiProps(null, null, "function", "切换时调用的函数（返回当前label和当前tabkey）"),
-		"item-click": buildYduiProps(null, null, "function", "点击选项卡时触发的方法"),
-		"prevent-default": buildYduiProps(null, "true", "boolean", "是否自动切换"),
-		"horizontal-scroll": buildYduiProps(null, "false", "boolean", "是否可横向滚动")
+		"item-click": buildYduiProps(null, null, "function", "点击选项卡时触发的方法（v1.2.1新增）"),
+		"prevent-default": buildYduiProps(null, "true", "boolean", "是否自动切换（v1.2.1新增）"),
+		"horizontal-scroll": buildYduiProps(null, "false", "boolean", "是否可横向滚动（v1.2.1新增）")
     })
     return {
         // 这个是在 dom 树中显示可以用的
@@ -59,7 +65,13 @@ export const ydTab = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydTabPanel = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.TabPanel.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.TabPanel.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.TabPanel.props[i]
+    }
+    props = Object.assign({}, props, {
 		"label": buildYduiProps(null, null, "string", "选项卡标题"),
 		"active": buildYduiProps(null, null, "boolean", "是否激活当前选项卡"),
 		"tabkey": buildYduiProps(null, null, "string || number", "选项卡的值（多用于区分各个选项卡），不指定将返回当前索引")

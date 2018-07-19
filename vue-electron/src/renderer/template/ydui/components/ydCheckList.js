@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydCheckList = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CheckList.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CheckList.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CheckList.props[i]
+    }
+    props = Object.assign({}, props, {
 		"color": buildYduiProps(null, "#4cd864", "string & 常规颜色值", "选中颜色"),
 		"align": buildYduiProps([ "left", " right" ], "left", "string", "图标放置位置"),
 		"label": buildYduiProps(null, "true", "boolean", "是否启用点击整行触发选中"),
@@ -58,7 +64,13 @@ export const ydCheckList = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydCheckListItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.CheckListItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.CheckListItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.CheckListItem.props[i]
+    }
+    props = Object.assign({}, props, {
 		"disabled": buildYduiProps(null, "false", "boolean", "是否禁用"),
 		"val": buildYduiProps(null, null, "boolean,string,number", "值（必填）")
     })

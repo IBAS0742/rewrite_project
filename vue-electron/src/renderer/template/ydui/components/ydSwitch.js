@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydSwitch = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Switch.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Switch.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Switch.props[i]
+    }
+    props = Object.assign({}, props, {
 		"disabled": buildYduiProps(null, "false", "boolean", "是否禁用"),
 		"color": buildYduiProps(null, "#4cd864", "string && 常规颜色值", "颜色"),
 		"true-value": buildYduiProps(null, "true", "string, number, boolean", "选中时的值"),

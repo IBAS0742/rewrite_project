@@ -5,9 +5,20 @@
 // YDUI-chi-name 组件中文标签
 
 export const yd#YDUI-Name# = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.#YDUI-Name#.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.#YDUI-Name#.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.#YDUI-Name#.props[i]
+    }
+    props = Object.assign({}, props, {
         // #props#
     })
+    for (let i in props) {
+        if (props[i].type.constructor.name !== 'String') {
+            props[i] = buildYduiProps(null,null,'string',"")
+        }
+    }
     return {
         // 这个是在 dom 树中显示可以用的
         name: 'yd#YDUI-Name#',
@@ -22,12 +33,10 @@ export const yd#YDUI-Name# = (function () {
             for (let i in props) {
                 p[i] = props[i].default
             }
-            console.log(props)
             return p
         })(props),
         // 生成一个基础的 yd-#YDUI-name# 对象的节点
         createElementNode() {
-            console.log(this.baseProps)
             // #slot#let id = '#YDUI-tiny-name#-' + (new Date()).getTime()
             return {
                 // #normal#id: '#YDUI-tiny-name#-' + (new Date()).getTime(),

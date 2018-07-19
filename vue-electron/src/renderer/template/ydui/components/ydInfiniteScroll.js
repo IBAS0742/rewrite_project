@@ -6,7 +6,13 @@ import { buildYduiProps, buildYduiSlot } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydInfiniteScroll = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.InfiniteScroll.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.InfiniteScroll.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.InfiniteScroll.props[i]
+    }
+    props = Object.assign({}, props, {
 		"callback": buildYduiProps(null, null, "function", "当列表滚动到底部时，调用的自定义方法"),
 		"distance": buildYduiProps(null, null, "number", "触发加载方法的滚动距离阈值（像素）"),
 		"scroll-top": buildYduiProps(null, "true", "boolean", "是否初始化滚动至顶部")

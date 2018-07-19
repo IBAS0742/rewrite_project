@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydSendCode = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.SendCode.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.SendCode.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.SendCode.props[i]
+    }
+    props = Object.assign({}, props, {
 		"second": buildYduiProps(null, "60", "number", "倒计时时长（秒）"),
 		"init-str": buildYduiProps(null, "获取短信验证码", "string", "初始化按钮显示文本"),
 		"run-str": buildYduiProps(null, "{%s}秒后重新获取", "string", "运行时显示文本"),

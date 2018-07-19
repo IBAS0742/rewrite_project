@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydFlexBox = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.FlexBox.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.FlexBox.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.FlexBox.props[i]
+    }
+    props = Object.assign({}, props, {
 		"direction": buildYduiProps([ "horizontal", " vertical" ], "horizontal", "string", "布局方向（水平和垂直）")
     })
     return {
@@ -55,7 +61,13 @@ export const ydFlexBox = (function () {
 // YDUI-chi-name 组件中文标签
 
 export const ydFlexBoxItem = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.FlexBoxItem.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.FlexBoxItem.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.FlexBoxItem.props[i]
+    }
+    props = Object.assign({}, props, {
 		"align": buildYduiProps([ "top", " center", " bottom" ], "center", "string", "垂直对齐方式")
     })
     return {

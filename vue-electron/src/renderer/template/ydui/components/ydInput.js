@@ -6,7 +6,13 @@ import { buildYduiProps } from "../buildDefaultObject";
 // YDUI-chi-name 组件中文标签
 
 export const ydInput = (function () {
-    const props = Object.assign({}, Vue.temp.ydui.Input.props, {
+    let props = {}
+    for (let i in Vue.temp.ydui.Input.props) {
+        props[i.replace(/[A-Z]/g, (alphe) => {
+            return '-' + alphe.toLowerCase()
+        })] = Vue.temp.ydui.Input.props[i]
+    }
+    props = Object.assign({}, props, {
 		"name": buildYduiProps(null, null, "string", "表单name"),
 		"type": buildYduiProps([ "text", " password", " email", " number", " tel", " datetime-local", " date", " time" ], "text", "string", "文本框类型"),
 		"placeholder": buildYduiProps(null, null, "string", "描述输入字段"),
@@ -24,6 +30,11 @@ export const ydInput = (function () {
 		"on-focus": buildYduiProps(null, null, "function", "进入焦点事件"),
 		"on-blur": buildYduiProps(null, null, "function", "离开焦点事件")
     })
+    for (let i in props) {
+        if (props[i].type.constructor.name !== 'String') {
+            props[i] = buildYduiProps(null,null,'string',"")
+        }
+    }
     return {
         // 这个是在 dom 树中显示可以用的
         name: 'ydInput',
