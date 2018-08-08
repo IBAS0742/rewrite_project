@@ -19,31 +19,49 @@ var merge = require('webpack-merge');
 // 那么就作为入口处理
 
 exports.entries = function () {
-  var entryFiles = glob.sync(PAGE_PATH + '/*/*.js')
-  var map = {}
-  entryFiles.forEach((filePath) => {
-    var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-    map[filename] = filePath
-  })
+  var entryFiles = glob.sync(PAGE_PATH + '/**/*.js')
+  // var map = {}
+  // entryFiles.forEach((filePath) => {
+  //   let filenames = filePath.substring(PAGE_PATH.length).split('/');
+  //   filenames.shift();
+  //   filenames.splice(filenames.length - 2,1);
+  //   filenames[filenames.length - 1] = filenames[filenames.length - 1].substring(0,filenames[filenames.length - 1].lastIndexOf('.js'));
+  //   map[filenames.join('.')] = filePath
+  //   // var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+  //   // map[filename] = filePath
+  // })
+  let map = pagePathSetting.childMutilPage ?
+    pagePathSetting.childMutilEntry(entryFiles,PAGE_PATH) :
+    pagePathSetting.singleEntry(entryFiles,PAGE_PATH);
+  console.log('map',map)
   return map
 }
 
 //多页面输出配置
 // 与上面的多页面入口配置相同，读取pages文件夹下的对应的html后缀文件，然后放入数组中
 exports.htmlPlugin = function () {
-  let entryHtml = glob.sync(PAGE_PATH + '/*/*.html')
+  let entryHtml = glob.sync(PAGE_PATH + '/**/*.html')
   let arr = []
   entryHtml.forEach((filePath) => {
-    let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
-    let conf = {
-      // 模板来源
-      template: filePath,
-      // 文件名称
-      filename: filename + '.html',
-      // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
-      chunks: ['manifest', 'vendor', filename],
-      inject: true
-    }
+    // // let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
+    // let filenames = filePath.substring(PAGE_PATH.length).split('/');
+    // filenames.shift();
+    // filenames.splice(filenames.length - 2,1);
+    // filenames[filenames.length - 1] = filenames[filenames.length - 1].substring(0,filenames[filenames.length - 1].lastIndexOf('.html'));
+    // let conf = {
+    //   // 模板来源
+    //   template: filePath,
+    //   // 文件名称
+    //   filename: filenames.join('/') + '.html',
+    //   // filename: filenames + '.html',
+    //   // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
+    //   chunks: ['manifest', 'vendor', filenames.join('.')],
+    //   // chunks: ['manifest', 'vendor', filename],
+    //   inject: true
+    // }
+    let conf = pagePathSetting.childMutilPage ?
+                  pagePathSetting.childMutilHTMLOutput(filePath,PAGE_PATH) :
+                  pagePathSetting.singleHTMLOutput(filePath,PAGE_PATH);
     if (process.env.NODE_ENV === 'production') {
       conf = merge(conf, {
         minify: {
@@ -52,14 +70,11 @@ exports.htmlPlugin = function () {
           removeAttributeQuotes: true
         },
         chunksSortMode: 'dependency',
-        filename: 
-          (conf.filename in pagePathSetting ? 
-            pagePathSetting[conf.filename] : 
-            pagePathSetting.default)
-          + conf.filename
+        filename: (conf.filename in pagePathSetting.path ? pagePathSetting.path[conf.filename] : pagePathSetting.path.default) + conf.filename
       })
     }
     arr.push(new HtmlWebpackPlugin(conf))
+    console.log('conf',conf)
   })
   return arr
 }
